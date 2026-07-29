@@ -56,7 +56,7 @@ sns.heatmap(retention, annot=True, fmt=".0%", cmap="Blues")
 
 ### Retention Heatmap
 
-![Retention Heatmap](retention_heatmap_percent.png)
+![Retention Heatmap](retention_heatmap_weekly.png)
 
 ### Key Insights
 - Largest drop occurs between **Month 0 and Month 1**.

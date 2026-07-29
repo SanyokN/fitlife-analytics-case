@@ -1,48 +1,28 @@
-# End‑to‑end Data Analytics Case Study: SQL, Python, A/B Testing, Unit Economics
+# FitLife Analytics — End‑to‑End Data Analytics Case Study
+### SQL • Python • Cohorts • Unit Economics • A/B Testing
+This case study analyzes FitLife’s funnel performance, retention behavior, unit economics, and A/B test results to identify growth bottlenecks and quantify the impact of a redesigned Paywall.
+
 ## Project Overview
-**FitLife** is a subscription‑based fitness app with a 7‑day trial followed by a $9.99 monthly plan. Rising CAC, low trial‑to‑paid conversion, and early retention decay indicate inefficiencies across acquisition and lifecycle funnels. This project evaluates funnel performance, retention patterns, unit economics, and a statistically powered A/B test of a redesigned Paywall.
+FitLife is a subscription‑based fitness app offering a **7‑day trial** followed by a **$9.99 monthly plan**.
+The analysis focuses on:
+
+- Funnel conversion by acquisition channel
+- Weekly and monthly retention patterns
+- LTV, CAC efficiency, and ROMI
+- A/B test of a redesigned Paywall
+- Business impact and strategic recommendations
+
+The dataset is synthetic for SQL logic but scaled to FitLife’s real annual traffic of **1,200,000 users**.
 
 ## Tools & Metrics
-### SQL (PostgreSQL)
-- Funnel analysis
-- Cohort retention
-- Weekly activity metrics
-### Python: Pandas, NumPy, Seaborn, Matplotlib, Statsmodels
-- Exploratory analysis
-- Visualization
-- Statistical testing
-### Jupyter Notebook
-- Interactive workflow
-- Data exploration
-### Key Metrics
-- CR_to_trial
-- CR_trial_to_paid
-- Retention
-- LTV
-- CAC
-- ROMI
+- **SQL (PostgreSQL)** — funnel analysis, weekly retention, monthly cohorts
+- **Python (Pandas, Seaborn, Statsmodels)** — cohort visualization, statistical testing
 
-### Note on Dataset Size
-The SQL dataset is synthetic and intentionally small to demonstrate funnel logic, table structure, and analytical queries.
-All business impact calculations (including A/B uplift and revenue estimation) are scaled to FitLife’s **real annual traffic of 1,200,000 users**, reflecting the actual product environment.
+**Key Metrics**:
+
+CR_to_trial • CR_trial_to_paid • Retention • LTV • CAC • ROMI
 
 ## Funnel Analysis (SQL)
-The analysis is based on three core tables:
-
-- **users** — user profiles, acquisition source, registration date, device
-- **activity** — user events including trial activation and weekly activity
-- **transactions** — payment records and statuses
-
-Using these tables, I calculated:
-
-- Total users per acquisition channel
-- Trial activation rate (**CR_to_trial**)
-- Trial‑to‑paid conversion rate (**CR_trial_to_paid**)
-- Paying users
-- Weekly cohort size
-- Weekly active users
-- Weekly retention rate
-
 ### SQL Query
 ```sql
 SELECT
@@ -60,39 +40,31 @@ GROUP BY channel;
 
 <img width="872" height="111" alt="image" src="https://github.com/user-attachments/assets/0a6a2be0-ce21-4510-a898-bcf85936de5e" />
 
-The funnel reveals:
+### Key Insights
 
-- Organic delivers perfect performance (100% trial activation and 100% trial‑to‑paid) — every user completes the entire funnel without drop‑off
-- Instagram provides moderate lead quality (50% trial activation), but converts all trial users into paying customers (100%)
-- Facebook shows complete funnel failure (0% trial activation and 0% trial‑to‑paid) — the channel generates no engaged or paying users
+- Organic traffic converts perfectly.
+- Instagram sends moderate‑quality leads but converts all trial users.
+- Facebook delivers **zero** trial activations.
 
-## Retention Visualization (Python)
-To extend the weekly retention signals from the SQL analysis, the data was aggregated into **monthly cohorts** to highlight long‑term engagement patterns.
-
-### Code
+## Retention Analysis (Python)
+### Code (key parts)
 ```python
-# Cohort pivot
-cohort_pivot = df.groupby(['cohort_month', 'month_number'])['user_id'] \
-                 .nunique() \
-                 .unstack()
-
-# Normalize retention
-retention = cohort_pivot.div(cohort_pivot.iloc[:, 0], axis=0)
-
-# Heatmap
+cohort_pivot = df.groupby(['cohort_month','month_number'])['user_id'].nunique().unstack()
+retention = cohort_pivot.div(cohort_pivot.iloc[:,0], axis=0)
 sns.heatmap(retention, annot=True, fmt=".0%", cmap="Blues")
 ```
-### Visualization
+
+### Retention Heatmap
 
 ![Retention Heatmap](retention_heatmap_percent.png)
 
 ### Key Insights
-- **Retention declines consistently across all cohorts**, with the steepest drop occurring between month 0 and month 1
-- **Later cohorts (Apr–Jun) follow nearly identical retention curves**, indicating stable user behavior over time
-- **Long‑term retention stabilizes around 45–55%**, suggesting a predictable baseline of recurring users
+- Largest drop occurs between **Month 0 and Month 1**.
+- Later cohorts follow nearly identical curves, indicating stable long‑term behavior.
+- Retention stabilizes around **45–55%** by Month 5.
 
 ## Unit Economics
-### Code
+### Code (key parts)
 ```python
 LTV = AOV * lifespan_months
 ROMI = (LTV - CAC) / CAC
@@ -110,18 +82,11 @@ ROMI = (LTV - CAC) / CAC
 | ROMI          | negative for several channels |
 
 ### Key Insights
-FitLife cannot scale acquisition efficiently without improving conversion or reducing CAC. Retention improvements would directly increase LTV and unlock sustainable growth.
+FitLife cannot scale efficiently without improving conversion or reducing CAC. Retention improvements directly increase LTV and unlock sustainable growth.
 
 ## A/B Test — New Paywall Design
 ### Hypothesis
-A redesigned Paywall highlighting the annual discount will increase trial‑to‑paid conversion by reducing decision friction.
-
-### Experiment Setup
-- Baseline CR: **1.5%**
-- MDE: **+20% relative**
-- Power: **80%**
-- Significance level: **5%**
-- Required sample size: **~23,500 users per group**
+A redesigned Paywall will increase trial‑to‑paid conversion.
 
 ### Results
 | Group    | Conversion | Buyers  |
@@ -129,40 +94,32 @@ A redesigned Paywall highlighting the annual discount will increase trial‑to�
 | Control  | 1.50%      | 18,000  |
 | Variant  | 1.87%      | 22,440  |
 
-### Statistical Significance
-| Metric   | Value   |
-|----------|---------|
-| Uplift   | +24%    |
-| p-value  | < 0.05  |
-
-### Conclusion
-The new Paywall significantly improves conversion and should be rolled out to all users.
+- **Uplift**: +24%
+- **p-value**: < 0.05 (statistically significant)
 
 ## Business Impact
-With annual traffic of **1,200,000 users**:
+Annual traffic: **1,200,000 users**:
 
 | Metric                | Value        |
 |-----------------------|--------------|
-| Control buyers        | 18,000       |
-| Variant buyers        | 22,440       |
 | Additional buyers     | +4,440       |
 | Incremental revenue   | +$186,258    |
 
-The redesigned Paywall provides a clear and measurable financial benefit.
+### Conclusion
+The redesigned Paywall significantly improves conversion and should be rolled out globally.
 
-### Executive Insights
-- High‑volume channels deliver low trial activation, indicating inefficient marketing spend.
-- Trial‑to‑paid conversion is significantly lower on Android, suggesting UX or Paywall issues.
-- Monthly retention shows structural decay after Month 1, needing onboarding improvements.
-- Unit economics are borderline sustainable (LTV/CAC ≈ 1.4×), limiting growth potential.
-- The new Paywall increases conversion by +24% (statistically significant).
-- Rolling out the new Paywall yields an estimated **+$186k** in annual incremental revenue.
+## Executive Insights
+- High‑volume channels deliver weak trial activation, indicating inefficient spend.
+- Android users convert worse, suggesting UX/Paywall issues.
+- Retention decays sharply after Month 1, indicating onboarding gaps.
+- LTV/CAC ≈ 1.4×, indicating limited scalability.
+- The new Paywall delivers a 24% uplift in conversion, resulting in approximately $186k in additional annual revenue.
 
 ## Recommendations
-- Roll out the new Paywall globally
-- Improve onboarding flow and early‑week engagement
-- Reallocate budget from low‑performing channels
-- Strengthen mid‑lifecycle retention mechanics (pushes, challenges, content)
+- Roll out the new Paywall.
+- Improve onboarding and early‑week engagement.
+- Shift budget away from low‑performing channels.
+- Strengthen mid‑lifecycle retention (pushes, challenges, content).
 
 ## Repository Structure
 
@@ -195,13 +152,6 @@ fitlife-analytics/
 ```
 
 ## Summary
-This end‑to‑end analytics project demonstrates:
+This project demonstrates the full workflow of a product data analyst:
 
-- SQL data extraction
-- Funnel and cohort analysis
-- Python visualization
-- Unit economics modeling
-- A/B testing with statistical validation
-- Business impact estimation
-
-It showcases the full workflow of a product data analyst and provides a realistic example of how data drives product decisions.
+**SQL → Python → Cohorts → Unit Economics → A/B Testing → Business Impact.**

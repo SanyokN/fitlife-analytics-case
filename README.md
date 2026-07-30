@@ -25,15 +25,27 @@ CR_to_trial • CR_trial_to_paid • Retention • LTV • CAC • ROMI
 ## Funnel Analysis (SQL)
 ### SQL Query
 ```sql
-SELECT
-    channel,
-    COUNT(*) AS users,
-    SUM(CASE WHEN trial_start IS NOT NULL THEN 1 END) AS trial_users,
-    SUM(CASE WHEN is_paying = TRUE THEN 1 END) AS paying_users,
-    ROUND(trial_users * 100.0 / users, 2) AS cr_to_trial,
-    ROUND(paying_users * 100.0 / trial_users, 2) AS cr_trial_to_paid
-FROM users
-GROUP BY channel;
+WITH user_funnel AS (
+    SELECT 
+        u.id AS user_id,
+        u.source,
+        COUNT(CASE WHEN a.event_name = 'trial_activated' THEN 1 END) AS activated_trial,
+        COUNT(CASE WHEN t.payment_status = 'completed' THEN 1 END) AS paid
+    FROM users u
+    LEFT JOIN activity a ON u.id = a.user_id
+    LEFT JOIN transactions t ON u.id = t.user_id
+    GROUP BY u.id, u.source
+)
+SELECT 
+    source,
+    COUNT(user_id) AS total_users,
+    -- Conversion to Trial (%)
+    ROUND(SUM(CASE WHEN activated_trial > 0 THEN 1 ELSE 0 END)::numeric / COUNT(user_id) * 100, 2) AS cr_to_trial,
+    -- Conversion from Trial to Paid (%)
+    ROUND(SUM(CASE WHEN paid > 0 THEN 1 ELSE 0 END)::numeric / NULLIF(SUM(CASE WHEN activated_trial > 0 THEN 1 ELSE 0 END), 0) * 100, 2) AS cr_trial_to_paid
+FROM user_funnel
+GROUP BY source
+ORDER BY total_users DESC;
 ```
 
 ### Funnel Results
@@ -49,7 +61,7 @@ GROUP BY channel;
 ## Retention Analysis (Python)
 ### Code (key parts)
 ```python
-cohort_pivot = df.groupby(['cohort_month','month_number'])['user_id'].nunique().unstack()
+cohort_pivot = df.groupby(['cohort_week', 'week_number'])
 retention = cohort_pivot.div(cohort_pivot.iloc[:,0], axis=0)
 sns.heatmap(retention, annot=True, fmt=".0%", cmap="Blues")
 ```
@@ -59,15 +71,16 @@ sns.heatmap(retention, annot=True, fmt=".0%", cmap="Blues")
 ![Retention Heatmap](retention_heatmap_weekly.png)
 
 ### Key Insights
-- Largest drop occurs between **Month 0 and Month 1**.
+- Largest drop occurs between **Week 0 and Week 1** (dropping to ~35–41%).
 - Later cohorts follow nearly identical curves, indicating stable long‑term behavior.
-- Retention stabilizes around **45–55%** by Month 5.
+- Retention decays steadily, stabilizing around **11–12% by Week 4**.
+- Cohort **Week 22** shows an noticeable retention dip at Week 2 (18.2%), suggesting possible technical issues or poor acquisition traffic during that period.
 
 ## Unit Economics
 ### Code (key parts)
 ```python
 LTV = AOV * lifespan_months
-ROMI = (LTV - CAC) / CAC
+ROMI = ((LTV - CAC) / CAC) * 100
 ```
 
 ### Key metrics
@@ -94,7 +107,7 @@ A redesigned Paywall will increase trial‑to‑paid conversion.
 | Control  | 1.50%      | 18,000  |
 | Variant  | 1.87%      | 22,440  |
 
-- **Uplift**: +24%
+- **Uplift**: +24.7%
 - **p-value**: < 0.05 (statistically significant)
 
 ## Business Impact
@@ -111,7 +124,7 @@ The redesigned Paywall significantly improves conversion and should be rolled ou
 ## Executive Insights
 - High‑volume channels deliver weak trial activation, indicating inefficient spend.
 - Android users convert worse, suggesting UX/Paywall issues.
-- Retention decays sharply after Month 1, indicating onboarding gaps.
+- Retention decays sharply after Week 1, indicating onboarding gaps.
 - LTV/CAC ≈ 1.4×, indicating limited scalability.
 - The new Paywall delivers a 24% uplift in conversion, resulting in approximately $186k in additional annual revenue.
 

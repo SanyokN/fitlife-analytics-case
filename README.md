@@ -25,45 +25,55 @@ CR_to_trial • CR_trial_to_paid • Retention • LTV • CAC • ROMI
 ## Funnel Analysis (SQL)
 ### SQL Query
 ```sql
-WITH user_funnel AS (
-    SELECT 
-        u.id AS user_id,
-        u.source,
-        COUNT(CASE WHEN a.event_name = 'trial_activated' THEN 1 END) AS activated_trial,
-        COUNT(CASE WHEN t.payment_status = 'completed' THEN 1 END) AS paid
-    FROM users u
-    LEFT JOIN activity a ON u.id = a.user_id
-    LEFT JOIN transactions t ON u.id = t.user_id
-    GROUP BY u.id, u.source
-)
-SELECT 
-    source,
-    COUNT(user_id) AS total_users,
-    -- Conversion to Trial (%)
-    ROUND(SUM(CASE WHEN activated_trial > 0 THEN 1 ELSE 0 END)::numeric / COUNT(user_id) * 100, 2) AS cr_to_trial,
-    -- Conversion from Trial to Paid (%)
-    ROUND(SUM(CASE WHEN paid > 0 THEN 1 ELSE 0 END)::numeric / NULLIF(SUM(CASE WHEN activated_trial > 0 THEN 1 ELSE 0 END), 0) * 100, 2) AS cr_trial_to_paid
-FROM user_funnel
-GROUP BY source
+SELECT
+    u.source,
+    COUNT(DISTINCT u.id) AS total_users,
+    COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END) AS trial_users,
+    ROUND(
+        COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END)::numeric 
+        / COUNT(DISTINCT u.id) * 100, 2
+    ) AS cr_to_trial,
+    COUNT(DISTINCT CASE WHEN t.payment_status = 'completed' THEN u.id END) AS paying_users,
+    ROUND(
+        COUNT(DISTINCT CASE WHEN t.payment_status = 'completed' THEN u.id END)::numeric 
+        / NULLIF(COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END), 0) * 100, 2
+    ) AS cr_trial_to_paid
+FROM users u
+LEFT JOIN activity a ON u.id = a.user_id
+LEFT JOIN transactions t ON u.id = t.user_id
+GROUP BY u.source
 ORDER BY total_users DESC;
 ```
 
 ### Funnel Results
-
-<img width="872" height="111" alt="image" src="https://github.com/user-attachments/assets/0a6a2be0-ce21-4510-a898-bcf85936de5e" />
+<img width="1022" height="135" alt="image" src="https://github.com/user-attachments/assets/d1b4c781-46f1-4c07-b1d9-a050f34b21ed" />
 
 ### Key Insights
 
-- Organic traffic converts perfectly.
-- Instagram sends moderate‑quality leads but converts all trial users.
-- Facebook delivers **zero** trial activations.
+* **Organic** is the top-performing acquisition channel, leading in trial conversion rate (**13.43%**).
+* **Instagram** delivers the highest-quality leads, achieving the top trial-to-paid conversion rate (**15.91%**).
+* **TikTok** generated 300 users but showed a **0%** trial-to-paid conversion rate (`cr_trial_to_paid = 0`).
 
 ## Retention Analysis (Python)
 ### Code (key parts)
 ```python
-cohort_pivot = df.groupby(['cohort_week', 'week_number'])
-retention = cohort_pivot.div(cohort_pivot.iloc[:,0], axis=0)
-sns.heatmap(retention, annot=True, fmt=".0%", cmap="Blues")
+# Create synthetic absolute user counts per cohort
+data = {
+    'Cohort': ['Week 20', 'Week 21', 'Week 22', 'Week 23', 'Week 24'],
+    'W0': [1500, 1620, 1480, 1710, 1550],
+    'W1': [531,  617,  474,  675,  639],
+    'W2': [332,  397,  269,  429,  np.nan],
+    'W3': [237,  275,  170,  np.nan, np.nan],
+    'W4': [180,  181,  np.nan, np.nan, np.nan]
+}
+cohort_pivot = pd.DataFrame(data).set_index('Cohort')
+
+# Calculate relative Retention Rate (%) relative to Week 0
+retention = cohort_pivot.div(cohort_pivot.iloc[:, 0], axis=0) * 100
+
+# Plot weekly retention heatmap using Seaborn
+plt.figure(figsize=(10, 6))
+sns.heatmap(retention, annot=True, fmt=".1f", cmap="YlGnBu", cbar_kws={'label': '% Retention'})
 ```
 
 ### Retention Heatmap
@@ -71,16 +81,19 @@ sns.heatmap(retention, annot=True, fmt=".0%", cmap="Blues")
 ![Retention Heatmap](retention_heatmap_weekly.png)
 
 ### Key Insights
-- Largest drop occurs between **Week 0 and Week 1** (dropping to ~35–41%).
+- The steepest drop occurs immediately after onboarding, with **Week 1 Retention dropping to ~32–41%** across cohorts (a ~60% user churn in the first 7 days).
 - Later cohorts follow nearly identical curves, indicating stable long‑term behavior.
 - Retention decays steadily, stabilizing around **11–12% by Week 4**.
-- Cohort **Week 22** shows an noticeable retention dip at Week 2 (18.2%), suggesting possible technical issues or poor acquisition traffic during that period.
+- Cohort **Week 22** shows an noticeable retention dip at Week 2 (18.2%), suggesting possible technical issues or poor acquisition traffic during that period. 
 
 ## Unit Economics
 ### Code (key parts)
 ```python
+# LTV assuming 100% Gross Margin (pure marginal revenue per subscriber)
 LTV = AOV * lifespan_months
-ROMI = ((LTV - CAC) / CAC) * 100
+
+# Unit ROMI based on LTV per acquired customer
+romi_pct = ((LTV - CAC) / CAC) * 100
 ```
 
 ### Key metrics
@@ -89,10 +102,12 @@ ROMI = ((LTV - CAC) / CAC) * 100
 |---------------|--------------|
 | AOV           | $9.99        |
 | Lifespan      | 4.2 months   |
-| LTV           | $41.95       |
-| CAC           | varies       |
+| LTV           | $41.95 (Gross Margin = 100% assumed)      |
+| CAC           | $30.0       |
 | LTV/CAC       | ≈ 1.4×       |
-| ROMI          | negative for several channels |
+| ROMI          | +39.8% |
+
+**Note on LTV**: Calculated as AOV * Lifespan * Gross Margin. Gross Margin is assumed to be **100%** (pure marginal revenue per user) for unit economics modeling.
 
 ### Key Insights
 FitLife cannot scale efficiently without improving conversion or reducing CAC. Retention improvements directly increase LTV and unlock sustainable growth.
@@ -108,7 +123,7 @@ A redesigned Paywall will increase trial‑to‑paid conversion.
 | Variant  | 1.87%      | 22,440  |
 
 - **Uplift**: +24.7%
-- **p-value**: < 0.05 (statistically significant)
+- **p-value**: 0.00096 (statistically significant)
 
 ## Business Impact
 Annual traffic: **1,200,000 users**:
@@ -123,7 +138,6 @@ The redesigned Paywall significantly improves conversion and should be rolled ou
 
 ## Executive Insights
 - High‑volume channels deliver weak trial activation, indicating inefficient spend.
-- Android users convert worse, suggesting UX/Paywall issues.
 - Retention decays sharply after Week 1, indicating onboarding gaps.
 - LTV/CAC ≈ 1.4×, indicating limited scalability.
 - The new Paywall delivers a 24% uplift in conversion, resulting in approximately $186k in additional annual revenue.

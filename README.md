@@ -25,26 +25,29 @@ CR_to_trial • CR_trial_to_paid • Retention • LTV • CAC • ROMI
 ## Funnel Analysis (SQL)
 ### SQL Query
 ```sql
-WITH user_summary AS (
-    SELECT 
-        u.id AS user_id,
-        u.source,
-        MAX(CASE WHEN a.event_name = 'trial_activated' THEN 1 ELSE 0 END) AS has_trial,
-        MAX(CASE WHEN t.payment_status = 'completed' THEN 1 ELSE 0 END) AS has_paid
-    FROM users u
-    LEFT JOIN activity a ON u.id = a.user_id
-    LEFT JOIN transactions t ON u.id = t.user_id
-    GROUP BY u.id, u.source
+WITH trial_users AS (
+    SELECT user_id
+    FROM activity
+    WHERE event_name = 'trial_activated'
+    GROUP BY user_id
+),
+paying_users AS (
+    SELECT user_id
+    FROM transactions
+    WHERE payment_status = 'completed'
+    GROUP BY user_id
 )
-SELECT 
-    source,
-    COUNT(user_id) AS total_users,
-    SUM(has_trial) AS trial_users,
-    ROUND(SUM(has_trial)::numeric / COUNT(user_id) * 100, 2) AS cr_to_trial,
-    SUM(has_paid) AS paying_users,
-    ROUND(SUM(has_paid)::numeric / NULLIF(SUM(has_trial), 0) * 100, 2) AS cr_trial_to_paid
-FROM user_summary
-GROUP BY source
+SELECT
+    u.source,
+    COUNT(u.id) AS total_users,
+    COUNT(t.user_id) AS trial_users,
+    ROUND(COUNT(t.user_id)::numeric / COUNT(u.id) * 100, 2) AS cr_to_trial,
+    COUNT(p.user_id) AS paying_users,
+    ROUND(COUNT(p.user_id)::numeric / NULLIF(COUNT(t.user_id), 0) * 100, 2) AS cr_trial_to_paid
+FROM users u
+LEFT JOIN trial_users t ON u.id = t.user_id
+LEFT JOIN paying_users p ON t.id = p.user_id
+GROUP BY u.source
 ORDER BY total_users DESC;
 ```
 
@@ -60,23 +63,33 @@ ORDER BY total_users DESC;
 ## Retention Analysis (Python)
 ### Code (key parts)
 ```python
-# Create synthetic absolute user counts per cohort
-data = {
-    'Cohort': ['Week 20', 'Week 21', 'Week 22', 'Week 23', 'Week 24'],
-    'W0': [1500, 1620, 1480, 1710, 1550],
-    'W1': [531,  617,  474,  675,  639],
-    'W2': [332,  397,  269,  429,  np.nan],
-    'W3': [237,  275,  170,  np.nan, np.nan],
-    'W4': [180,  181,  np.nan, np.nan, np.nan]
-}
-cohort_pivot = pd.DataFrame(data).set_index('Cohort')
+# Retention Heatmap Generation (Key Snippet)
+plt.figure(figsize=(10, 5), dpi=300)
+sns.set_theme(style="white")
 
-# Calculate relative Retention Rate (%) relative to Week 0
-retention = cohort_pivot.div(cohort_pivot.iloc[:, 0], axis=0) * 100
+# 1. Plot Heatmap using Seaborn
+ax = sns.heatmap(
+    cohort_pivot, 
+    annot=True, 
+    fmt=".1f", 
+    cmap="Blues", 
+    vmin=0, 
+    vmax=100,
+    linewidths=1, 
+    linecolor='white',
+    cbar_kws={'label': '% Retention'},
+    annot_kws={"size": 11, "weight": "bold"}
+)
 
-# Plot weekly retention heatmap using Seaborn
-plt.figure(figsize=(10, 6))
-sns.heatmap(retention, annot=True, fmt=".1f", cmap="YlGnBu", cbar_kws={'label': '% Retention'})
+# 2. Append '%' symbol to heatmap cell values
+for text in ax.texts:
+    val = text.get_text()
+    if val != 'nan':
+        text.set_text(f"{val}%")
+
+# Styling & Export
+plt.title('Weekly Retention Rate (%) by User Cohorts', fontsize=14, fontweight='bold', pad=20)
+plt.savefig('visuals/retention_heatmap.png', dpi=300, bbox_inches='tight')
 ```
 
 ### Retention Heatmap
@@ -103,6 +116,7 @@ romi_pct = ((LTV - CAC) / CAC) * 100
 
 | Metric        | Value        |
 |---------------|--------------|
+| CR1 (Overall Conversion) | 1.5% |
 | AOV           | $9.99        |
 | Lifespan      | 4.2 months   |
 | LTV           | $41.95 (Gross Margin = 100% assumed)      |
@@ -120,21 +134,27 @@ FitLife cannot scale efficiently without improving conversion or reducing CAC. R
 A redesigned Paywall will increase trial‑to‑paid conversion.
 
 ### Results
-| Group    | Conversion | Buyers  |
-|----------|------------|---------|
-| Control  | 1.50%      | 18,000  |
-| Variant  | 1.87%      | 22,440  |
+| Group    | Sample Size (N) | Conversion | Buyers  |
+|----------|-|------------|---------|
+| Control  | 24,100 | 1.50%      | 362  |
+| Variant  | 24,350 | 1.87%      | 455  |
 
 - **Uplift**: +24.7%
 - **p-value**: 0.00096 (statistically significant)
 
 ## Business Impact
-Annual traffic: **1,200,000 users**:
 
-| Metric                | Value        |
-|-----------------------|--------------|
-| Additional buyers     | +4,440       |
-| Incremental revenue   | +$186,258    |
+By extrapolating the observed uplift (+24.7%) to our annual traffic of 1.2M users, we project an additional **+4,440 incremental subscribers** per year.
+
+| Metric | Value |
+| :--- | :--- |
+| Annual Traffic | 1,200,000 users |
+| Baseline Buyers (Control) | 18,000 |
+| Projected Buyers (Variant B) | 22,440 |
+| **Incremental Subscribers** | **+4,440** |
+| **Additional Annual Revenue** | **+$186,258** |
+
+> **Note on Revenue Calculation:** Calculated as `4,440 incremental buyers × $41.95 LTV`.
 
 ### Conclusion
 The redesigned Paywall significantly improves conversion and should be rolled out globally.
@@ -159,25 +179,22 @@ fitlife-analytics/
 │   ├── users.csv
 │   ├── activity.csv
 │   └── transactions.csv
-│
 ├── sql/
 │   ├── funnel_analysis.sql
 │   ├── retention_weekly.sql
 │   └── cohort_monthly.sql
-│
 ├── python/
 │   ├── retention_heatmap.ipynb
 │   ├── ab_test_analysis.ipynb
 │   └── unit_economics.ipynb
-│
 ├── visuals/
 │   ├── funnel_results.png
 │   ├── retention_heatmap.png
 │   └── paywall_ab_test.png
-│
 ├── docs/
-│   └── README.md
-│
+│   └── 
+├── .gitignore
+├── README.md                  
 └── requirements.txt
 ```
 

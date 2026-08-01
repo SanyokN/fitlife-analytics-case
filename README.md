@@ -25,23 +25,26 @@ CR_to_trial • CR_trial_to_paid • Retention • LTV • CAC • ROMI
 ## Funnel Analysis (SQL)
 ### SQL Query
 ```sql
-SELECT
-    u.source,
-    COUNT(DISTINCT u.id) AS total_users,
-    COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END) AS trial_users,
-    ROUND(
-        COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END)::numeric 
-        / COUNT(DISTINCT u.id) * 100, 2
-    ) AS cr_to_trial,
-    COUNT(DISTINCT CASE WHEN t.payment_status = 'completed' THEN u.id END) AS paying_users,
-    ROUND(
-        COUNT(DISTINCT CASE WHEN t.payment_status = 'completed' THEN u.id END)::numeric 
-        / NULLIF(COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END), 0) * 100, 2
-    ) AS cr_trial_to_paid
-FROM users u
-LEFT JOIN activity a ON u.id = a.user_id
-LEFT JOIN transactions t ON u.id = t.user_id
-GROUP BY u.source
+WITH user_summary AS (
+    SELECT 
+        u.id AS user_id,
+        u.source,
+        MAX(CASE WHEN a.event_name = 'trial_activated' THEN 1 ELSE 0 END) AS has_trial,
+        MAX(CASE WHEN t.payment_status = 'completed' THEN 1 ELSE 0 END) AS has_paid
+    FROM users u
+    LEFT JOIN activity a ON u.id = a.user_id
+    LEFT JOIN transactions t ON u.id = t.user_id
+    GROUP BY u.id, u.source
+)
+SELECT 
+    source,
+    COUNT(user_id) AS total_users,
+    SUM(has_trial) AS trial_users,
+    ROUND(SUM(has_trial)::numeric / COUNT(user_id) * 100, 2) AS cr_to_trial,
+    SUM(has_paid) AS paying_users,
+    ROUND(SUM(has_paid)::numeric / NULLIF(SUM(has_trial), 0) * 100, 2) AS cr_trial_to_paid
+FROM user_summary
+GROUP BY source
 ORDER BY total_users DESC;
 ```
 

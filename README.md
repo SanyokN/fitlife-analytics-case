@@ -6,7 +6,7 @@ This case study analyzes FitLife’s funnel performance, retention behavior, uni
 FitLife is a subscription‑based fitness app offering a **7‑day trial** followed by a **$9.99 monthly plan**.
 The analysis focuses on:
 
-- Funnel conversion by acquisition channel
+- End-to-end funnel conversion by acquisition channel
 - Weekly and monthly retention patterns
 - LTV, CAC efficiency, and ROMI
 - A/B test of a redesigned Paywall
@@ -18,9 +18,13 @@ The dataset is synthetic for SQL logic but scaled to FitLife’s real annual tra
 - **SQL (PostgreSQL)** — funnel analysis, weekly retention, monthly cohorts
 - **Python (Pandas, Seaborn, Statsmodels)** — cohort visualization, statistical testing
 
-**Key Metrics**:
+### Key Funnel Metrics Definitions
 
-CR_to_trial • CR_trial_to_paid • Retention • LTV • CAC • ROMI
+* **UA (User Acquisition):** Total volume of incoming traffic/downloads.
+* **Trial Activation Rate ($\text{CR}_{\text{trial}}$):** Percentage of acquired users who activate a 7-day free trial.
+* **Trial-to-Paid Conversion ($\text{CR}_{\text{trial}\to\text{paid}}$):** Percentage of trial users who complete their first subscription payment (Paywall efficiency).
+* **Overall Conversion Rate ($\text{CR}_1$):** Blended end-to-end conversion rate from initial visit to paying subscriber.
+  $$\text{CR}_1 = \text{Trial Activation Rate} \times \text{Trial-to-Paid CR}$$
 
 ## Funnel Analysis (SQL)
 ### SQL Query
@@ -46,7 +50,7 @@ SELECT
     ROUND(COUNT(p.user_id)::numeric / NULLIF(COUNT(t.user_id), 0) * 100, 2) AS cr_trial_to_paid
 FROM users u
 LEFT JOIN trial_users t ON u.id = t.user_id
-LEFT JOIN paying_users p ON t.id = p.user_id
+LEFT JOIN paying_users p ON u.id = p.user_id
 GROUP BY u.source
 ORDER BY total_users DESC;
 ```
@@ -54,9 +58,14 @@ ORDER BY total_users DESC;
 ### Funnel Results
 <img width="1022" height="135" alt="image" src="https://github.com/user-attachments/assets/d1b4c781-46f1-4c07-b1d9-a050f34b21ed" />
 
+&nbsp;
+
+> **Key Takeaway:** 
+> While **TikTok** shows critical issues in *Trial Activation* (1.67%), **Instagram** shows the strongest *Trial-to-Paid CR* (15.91%). The aggregated blended baseline **Overall CR1** across all channels is **1.50%**.
+
 ### Key Insights
 
-* **Organic** is the top-performing acquisition channel, leading in trial conversion rate (**13.43%**).
+* **Organic** is the top-performing acquisition channel, leading in trial activation rate (13.43%).
 * **Instagram** delivers the highest-quality leads, achieving the top trial-to-paid conversion rate (**15.91%**).
 * **TikTok** generated 300 users but showed a **0%** trial-to-paid conversion rate (`cr_trial_to_paid = 0`).
 
@@ -112,29 +121,28 @@ LTV = AOV * lifespan_months
 romi_pct = ((LTV - CAC) / CAC) * 100
 ```
 
-### Key metrics
+### Unit Economics Model Parameters
 
-| Metric        | Value        |
-|---------------|--------------|
-| CR1 (Overall Conversion) | 1.5% |
-| AOV           | $9.99        |
-| Lifespan      | 4.2 months   |
-| LTV           | $41.95 (Gross Margin = 100% assumed)      |
-| CAC           | $30.0       |
-| LTV/CAC       | ≈ 1.4×       |
-| ROMI          | +39.8% |
+| Metric | Nomenclature | Value | Note / Formula |
+| :--- | :--- | :--- | :--- |
+| **Overall Conversion** | `CR1` | **1.50%** | End-to-end conversion ($\text{UA} \to \text{Paid}$) |
+| **Trial-to-Paid CR** | `CR_trial_to_paid` | **~12.5%** | Baseline paywall conversion |
+| **AOV** | `AOV` | **$9.99** | Monthly subscription price |
+| **Customer Lifespan** | `lifespan` | **4.2 months** | Average active lifetime before churn |
+| **Lifetime Value** | `LTV` | **$41.95** | AOV * Lifespan * Gross Margin (100%) |
+| **Customer Acquisition Cost** | `CAC` | **$30.00** | $\frac{\text{Ad Budget}}{\text{Buyers}}$ |
 
 **Note on LTV**: Calculated as AOV * Lifespan * Gross Margin. Gross Margin is assumed to be **100%** (pure marginal revenue per user) for unit economics modeling.
 
 ### Key Insights
-FitLife cannot scale efficiently without improving conversion or reducing CAC. Retention improvements directly increase LTV and unlock sustainable growth.
+FitLife cannot scale efficiently without improving overall conversion (CR1) or reducing CAC. Retention improvements directly increase LTV and unlock sustainable growth.
 
 ## A/B Test — New Paywall Design
 ### Hypothesis
 A redesigned Paywall will increase trial‑to‑paid conversion.
 
 ### Results
-| Group    | Sample Size (N) | Conversion | Buyers  |
+| Group    | Sample Size (N) | Trial-to-Paid CR | Buyers  |
 |----------|-|------------|---------|
 | Control  | 24,100 | 1.50%      | 362  |
 | Variant  | 24,350 | 1.87%      | 455  |
@@ -157,13 +165,13 @@ By extrapolating the observed uplift (+24.7%) to our annual traffic of 1.2M user
 > **Note on Revenue Calculation:** Calculated as `4,440 incremental buyers × $41.95 LTV`.
 
 ### Conclusion
-The redesigned Paywall significantly improves conversion and should be rolled out globally.
+The redesigned Paywall significantly improves trial monetization and should be rolled out globally.
 
 ## Executive Insights
 - High‑volume channels deliver weak trial activation, indicating inefficient spend.
 - Retention decays sharply after Week 1, indicating onboarding gaps.
 - LTV/CAC ≈ 1.4×, indicating limited scalability.
-- The new Paywall delivers a 24% uplift in conversion, resulting in approximately $186k in additional annual revenue.
+- The new Paywall delivers a 24% uplift in trial-to-paid conversion, resulting in approximately $186k in additional annual revenue.
 
 ## Recommendations
 - Roll out the new Paywall.

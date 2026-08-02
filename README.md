@@ -65,7 +65,7 @@ ORDER BY total_users DESC;
 
 ### Key Insights
 
-* **Organic** is the top-performing acquisition channel, leading in trial activation rate (13.43%).
+* **Organic** is the top-performing acquisition channel, leading in trial activation rate (**13.43%**).
 * **Instagram** delivers the highest-quality leads, achieving the top trial-to-paid conversion rate (**15.91%**).
 * **TikTok** generated 300 users but showed a **0%** trial-to-paid conversion rate (`cr_trial_to_paid = 0`).
 

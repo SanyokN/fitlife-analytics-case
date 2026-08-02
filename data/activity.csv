@@ -1,0 +1,7 @@
+activity_id,user_id,activity_type,activity_date,duration_minutes
+1,1,Running,2024-03-10,30
+2,1,Cycling,2024-03-12,45
+3,2,Yoga,2024-03-11,60
+4,3,Swimming,2024-03-15,50
+5,4,Gym,2024-03-18,40
+6,5,Running,2024-03-20,35

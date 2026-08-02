@@ -1,0 +1,6 @@
+transaction_id,user_id,amount,transaction_date,product
+1,1,19.99,2024-03-05,Fitness Band
+2,2,9.99,2024-03-07,Protein Bar
+3,3,49.99,2024-03-09,Yoga Mat
+4,4,29.99,2024-03-12,Gym Gloves
+5,5,15.99,2024-03-14,Water Bottle

@@ -1,6 +1,1001 @@
-user_id,name,email,signup_date
-1,Alex Johnson,alex.johnson@example.com,2024-01-05
-2,Maria Petrova,maria.petrova@example.com,2024-01-12
-3,John Smith,john.smith@example.com,2024-02-03
-4,Elena Ivanova,elena.ivanova@example.com,2024-02-10
-5,David Brown,david.brown@example.com,2024-03-01
+id,source,registration_date,device
+1,Organic,2024-06-09,iOS
+2,TikTok,2024-05-19,iOS
+3,Instagram,2024-06-16,Android
+4,Google Ads,2024-06-09,Android
+5,Organic,2024-05-26,Android
+6,Organic,2024-05-22,Android
+7,Organic,2024-05-28,Android
+8,Instagram,2024-05-28,Android
+9,Google Ads,2024-06-12,iOS
+10,Instagram,2024-06-06,iOS
+11,Organic,2024-05-25,iOS
+12,TikTok,2024-05-18,Android
+13,Instagram,2024-05-21,Android
+14,Organic,2024-06-01,iOS
+15,Organic,2024-05-30,Android
+16,Organic,2024-06-02,Android
+17,Organic,2024-05-16,iOS
+18,Google Ads,2024-06-14,Android
+19,Google Ads,2024-06-08,Android
+20,Organic,2024-05-19,iOS
+21,Google Ads,2024-05-18,Android
+22,Organic,2024-05-27,iOS
+23,Organic,2024-05-30,Android
+24,Organic,2024-06-13,Android
+25,Google Ads,2024-05-23,Android
+26,Instagram,2024-06-01,iOS
+27,Organic,2024-06-05,Android
+28,Google Ads,2024-05-27,Android
+29,Google Ads,2024-05-19,iOS
+30,Organic,2024-06-02,Android
+31,Google Ads,2024-06-07,iOS
+32,Organic,2024-05-26,Android
+33,Organic,2024-06-02,iOS
+34,TikTok,2024-05-30,iOS
+35,TikTok,2024-05-17,iOS
+36,Instagram,2024-05-15,Android
+37,Organic,2024-06-04,iOS
+38,Organic,2024-06-07,Android
+39,Instagram,2024-06-05,iOS
+40,Google Ads,2024-05-31,iOS
+41,Organic,2024-06-06,iOS
+42,Google Ads,2024-06-02,Android
+43,Organic,2024-05-24,iOS
+44,TikTok,2024-06-14,Android
+45,Organic,2024-05-16,Android
+46,Instagram,2024-05-19,Android
+47,Organic,2024-06-03,iOS
+48,Google Ads,2024-06-14,iOS
+49,Google Ads,2024-05-29,Android
+50,Organic,2024-06-05,iOS
+51,TikTok,2024-06-15,Android
+52,Instagram,2024-06-09,iOS
+53,TikTok,2024-06-03,Android
+54,Instagram,2024-05-29,Android
+55,Google Ads,2024-06-15,Android
+56,TikTok,2024-05-18,iOS
+57,Organic,2024-05-18,Android
+58,Organic,2024-06-15,iOS
+59,Organic,2024-05-13,iOS
+60,Organic,2024-05-22,Android
+61,Organic,2024-06-02,Android
+62,Organic,2024-05-17,Android
+63,Instagram,2024-05-14,Android
+64,Organic,2024-06-03,iOS
+65,Organic,2024-05-14,iOS
+66,Google Ads,2024-05-22,Android
+67,Organic,2024-06-15,iOS
+68,Instagram,2024-05-28,iOS
+69,Organic,2024-06-03,iOS
+70,TikTok,2024-05-24,iOS
+71,Instagram,2024-06-05,iOS
+72,Organic,2024-05-22,iOS
+73,Organic,2024-06-16,iOS
+74,Instagram,2024-06-13,iOS
+75,Instagram,2024-05-19,Android
+76,Instagram,2024-06-02,iOS
+77,Instagram,2024-06-01,iOS
+78,Organic,2024-06-07,Android
+79,Organic,2024-05-16,iOS
+80,Organic,2024-06-03,Android
+81,Instagram,2024-05-27,Android
+82,Google Ads,2024-06-02,iOS
+83,Organic,2024-05-27,iOS
+84,Organic,2024-06-03,Android
+85,Organic,2024-06-09,Android
+86,Organic,2024-05-26,iOS
+87,Instagram,2024-06-08,Android
+88,Google Ads,2024-06-09,iOS
+89,Instagram,2024-06-07,Android
+90,Google Ads,2024-05-14,iOS
+91,Organic,2024-06-06,Android
+92,Instagram,2024-05-15,Android
+93,Instagram,2024-05-20,Android
+94,Google Ads,2024-06-14,iOS
+95,Instagram,2024-06-16,iOS
+96,Google Ads,2024-05-18,iOS
+97,Google Ads,2024-06-04,iOS
+98,Google Ads,2024-06-06,iOS
+99,Organic,2024-05-31,Android
+100,Organic,2024-05-17,iOS
+101,Organic,2024-05-23,iOS
+102,Google Ads,2024-05-24,Android
+103,Organic,2024-05-22,Android
+104,Google Ads,2024-05-20,Android
+105,TikTok,2024-06-05,Android
+106,Organic,2024-06-09,iOS
+107,Google Ads,2024-06-02,iOS
+108,Instagram,2024-05-20,Android
+109,Organic,2024-05-21,Android
+110,Organic,2024-05-27,iOS
+111,Organic,2024-05-30,Android
+112,Organic,2024-06-01,iOS
+113,TikTok,2024-05-18,iOS
+114,Instagram,2024-05-24,iOS
+115,Google Ads,2024-05-14,Android
+116,Instagram,2024-05-19,Android
+117,Instagram,2024-05-28,iOS
+118,Organic,2024-05-15,Android
+119,Instagram,2024-05-15,iOS
+120,Google Ads,2024-06-08,iOS
+121,Instagram,2024-06-14,Android
+122,Instagram,2024-06-09,Android
+123,Organic,2024-05-13,Android
+124,Organic,2024-05-20,Android
+125,Organic,2024-06-13,Android
+126,Google Ads,2024-05-16,Android
+127,Instagram,2024-06-11,iOS
+128,Instagram,2024-05-18,iOS
+129,Organic,2024-05-31,iOS
+130,Google Ads,2024-06-13,iOS
+131,Google Ads,2024-05-21,Android
+132,Organic,2024-05-24,iOS
+133,Organic,2024-05-23,iOS
+134,Organic,2024-05-28,iOS
+135,TikTok,2024-05-13,Android
+136,Organic,2024-06-02,iOS
+137,Google Ads,2024-06-11,Android
+138,Instagram,2024-05-25,iOS
+139,Organic,2024-06-15,iOS
+140,TikTok,2024-05-16,Android
+141,TikTok,2024-06-09,Android
+142,Organic,2024-06-12,iOS
+143,Google Ads,2024-06-08,Android
+144,Organic,2024-05-17,Android
+145,Organic,2024-06-06,iOS
+146,Organic,2024-05-15,Android
+147,Google Ads,2024-06-14,Android
+148,Google Ads,2024-05-16,Android
+149,Organic,2024-06-06,Android
+150,Organic,2024-06-01,Android
+151,TikTok,2024-06-15,Android
+152,Organic,2024-06-07,Android
+153,Organic,2024-05-17,Android
+154,Google Ads,2024-06-16,Android
+155,TikTok,2024-06-09,Android
+156,Organic,2024-06-10,Android
+157,Instagram,2024-05-21,iOS
+158,Instagram,2024-05-18,Android
+159,Organic,2024-05-31,Android
+160,Instagram,2024-05-23,iOS
+161,Organic,2024-05-14,Android
+162,Google Ads,2024-05-21,iOS
+163,Google Ads,2024-06-02,iOS
+164,Google Ads,2024-06-05,Android
+165,Organic,2024-06-15,iOS
+166,Instagram,2024-06-03,Android
+167,Organic,2024-05-15,Android
+168,Organic,2024-05-24,iOS
+169,Organic,2024-06-09,iOS
+170,Google Ads,2024-06-11,iOS
+171,Instagram,2024-06-07,Android
+172,Organic,2024-06-02,Android
+173,Google Ads,2024-06-09,Android
+174,Organic,2024-06-07,iOS
+175,Google Ads,2024-06-14,Android
+176,Organic,2024-06-02,iOS
+177,Instagram,2024-06-16,Android
+178,Organic,2024-06-15,iOS
+179,TikTok,2024-05-30,Android
+180,Organic,2024-05-23,iOS
+181,Organic,2024-06-04,Android
+182,Organic,2024-06-03,iOS
+183,TikTok,2024-05-29,Android
+184,Instagram,2024-05-17,Android
+185,Organic,2024-05-23,iOS
+186,Instagram,2024-06-11,Android
+187,Instagram,2024-05-27,Android
+188,Google Ads,2024-06-08,iOS
+189,Google Ads,2024-06-16,iOS
+190,Organic,2024-06-14,Android
+191,Organic,2024-06-01,iOS
+192,Instagram,2024-05-28,Android
+193,TikTok,2024-06-15,iOS
+194,Google Ads,2024-05-14,Android
+195,Organic,2024-06-16,iOS
+196,Organic,2024-06-09,Android
+197,Instagram,2024-05-18,Android
+198,Instagram,2024-05-21,Android
+199,Instagram,2024-06-01,Android
+200,Instagram,2024-05-13,iOS
+201,Google Ads,2024-05-20,Android
+202,Organic,2024-06-04,iOS
+203,Organic,2024-05-15,iOS
+204,Instagram,2024-05-16,iOS
+205,Google Ads,2024-06-06,iOS
+206,Organic,2024-05-27,Android
+207,Organic,2024-06-02,Android
+208,Instagram,2024-06-16,iOS
+209,Organic,2024-05-26,iOS
+210,Organic,2024-05-24,Android
+211,Google Ads,2024-05-29,iOS
+212,Instagram,2024-05-21,iOS
+213,Instagram,2024-06-16,iOS
+214,Organic,2024-05-25,Android
+215,Instagram,2024-05-27,Android
+216,Organic,2024-05-30,iOS
+217,Organic,2024-06-14,iOS
+218,Instagram,2024-05-18,Android
+219,Google Ads,2024-06-08,Android
+220,Instagram,2024-06-04,iOS
+221,Instagram,2024-06-08,Android
+222,Google Ads,2024-06-15,iOS
+223,Organic,2024-05-26,iOS
+224,Organic,2024-05-20,Android
+225,Organic,2024-06-16,iOS
+226,Organic,2024-05-31,Android
+227,TikTok,2024-06-11,iOS
+228,Organic,2024-05-26,iOS
+229,Instagram,2024-06-01,Android
+230,Google Ads,2024-06-06,iOS
+231,Instagram,2024-06-05,Android
+232,Google Ads,2024-05-26,iOS
+233,Google Ads,2024-06-07,iOS
+234,Google Ads,2024-06-04,iOS
+235,Organic,2024-06-03,Android
+236,Instagram,2024-05-31,iOS
+237,Organic,2024-05-15,Android
+238,Organic,2024-05-31,iOS
+239,Google Ads,2024-05-21,Android
+240,Organic,2024-06-09,iOS
+241,TikTok,2024-06-01,Android
+242,TikTok,2024-05-19,Android
+243,TikTok,2024-05-26,Android
+244,Organic,2024-05-21,Android
+245,Organic,2024-05-31,Android
+246,TikTok,2024-05-26,Android
+247,Google Ads,2024-05-29,iOS
+248,TikTok,2024-06-11,iOS
+249,TikTok,2024-05-21,Android
+250,Instagram,2024-06-14,Android
+251,Organic,2024-06-06,Android
+252,Organic,2024-05-26,iOS
+253,Instagram,2024-05-23,iOS
+254,Organic,2024-06-16,iOS
+255,Organic,2024-05-26,Android
+256,Google Ads,2024-06-11,iOS
+257,TikTok,2024-05-16,iOS
+258,Instagram,2024-05-16,iOS
+259,Google Ads,2024-06-09,iOS
+260,Organic,2024-05-20,Android
+261,Google Ads,2024-05-14,iOS
+262,TikTok,2024-06-03,Android
+263,Organic,2024-05-28,iOS
+264,Google Ads,2024-06-10,iOS
+265,Instagram,2024-06-11,iOS
+266,Instagram,2024-05-24,iOS
+267,Instagram,2024-06-16,iOS
+268,Instagram,2024-05-23,iOS
+269,Organic,2024-06-02,Android
+270,Organic,2024-06-02,iOS
+271,Instagram,2024-05-17,Android
+272,Instagram,2024-06-01,Android
+273,Instagram,2024-05-15,Android
+274,TikTok,2024-06-14,iOS
+275,Google Ads,2024-05-21,iOS
+276,Google Ads,2024-05-21,iOS
+277,Instagram,2024-05-16,iOS
+278,Google Ads,2024-06-16,Android
+279,Instagram,2024-05-29,iOS
+280,Instagram,2024-06-15,iOS
+281,Instagram,2024-06-05,Android
+282,Organic,2024-06-13,Android
+283,Organic,2024-05-13,Android
+284,Organic,2024-05-20,iOS
+285,Google Ads,2024-06-04,iOS
+286,Organic,2024-05-24,iOS
+287,Google Ads,2024-05-24,iOS
+288,Google Ads,2024-05-27,iOS
+289,Organic,2024-05-31,iOS
+290,Google Ads,2024-06-07,iOS
+291,Organic,2024-06-10,iOS
+292,Organic,2024-06-03,iOS
+293,Instagram,2024-06-02,Android
+294,Organic,2024-06-01,Android
+295,Organic,2024-06-10,Android
+296,Google Ads,2024-05-16,iOS
+297,Instagram,2024-05-19,iOS
+298,Organic,2024-06-09,iOS
+299,Google Ads,2024-06-09,Android
+300,Organic,2024-05-16,Android
+301,Organic,2024-06-03,iOS
+302,Google Ads,2024-05-24,Android
+303,Google Ads,2024-05-15,iOS
+304,Google Ads,2024-06-03,iOS
+305,Instagram,2024-05-14,Android
+306,TikTok,2024-06-05,Android
+307,Google Ads,2024-06-15,Android
+308,Organic,2024-06-08,Android
+309,Instagram,2024-05-13,iOS
+310,Organic,2024-05-20,Android
+311,Google Ads,2024-06-04,iOS
+312,Organic,2024-05-18,Android
+313,Organic,2024-06-03,iOS
+314,TikTok,2024-06-06,Android
+315,Instagram,2024-05-30,iOS
+316,Instagram,2024-05-29,Android
+317,Google Ads,2024-05-24,iOS
+318,Organic,2024-05-18,Android
+319,Organic,2024-06-07,iOS
+320,Organic,2024-06-08,iOS
+321,Google Ads,2024-05-20,iOS
+322,Instagram,2024-05-31,iOS
+323,Instagram,2024-05-13,Android
+324,Organic,2024-06-10,iOS
+325,TikTok,2024-06-16,Android
+326,Instagram,2024-05-26,iOS
+327,Google Ads,2024-06-16,iOS
+328,Google Ads,2024-06-01,Android
+329,Google Ads,2024-05-25,Android
+330,Organic,2024-05-20,iOS
+331,Organic,2024-06-01,Android
+332,Instagram,2024-06-14,Android
+333,Organic,2024-06-07,iOS
+334,Organic,2024-06-02,Android
+335,Organic,2024-05-21,Android
+336,Organic,2024-06-05,Android
+337,Instagram,2024-05-29,iOS
+338,Instagram,2024-06-05,Android
+339,Google Ads,2024-06-02,iOS
+340,Organic,2024-05-25,iOS
+341,Google Ads,2024-05-23,iOS
+342,Google Ads,2024-05-31,iOS
+343,Organic,2024-05-23,Android
+344,Google Ads,2024-05-25,Android
+345,Organic,2024-05-13,Android
+346,Google Ads,2024-05-31,iOS
+347,Google Ads,2024-05-24,iOS
+348,Organic,2024-05-20,iOS
+349,Organic,2024-05-20,Android
+350,Google Ads,2024-05-24,iOS
+351,Google Ads,2024-06-14,Android
+352,Instagram,2024-06-07,Android
+353,Instagram,2024-06-09,iOS
+354,Organic,2024-05-17,Android
+355,Organic,2024-05-20,iOS
+356,Google Ads,2024-06-06,Android
+357,Organic,2024-06-08,Android
+358,Google Ads,2024-06-04,iOS
+359,TikTok,2024-06-11,iOS
+360,Google Ads,2024-06-04,Android
+361,Organic,2024-06-01,Android
+362,Google Ads,2024-05-30,iOS
+363,Google Ads,2024-05-30,Android
+364,Google Ads,2024-05-14,Android
+365,TikTok,2024-05-16,Android
+366,Organic,2024-06-11,iOS
+367,TikTok,2024-06-14,Android
+368,TikTok,2024-05-30,Android
+369,Organic,2024-05-31,iOS
+370,Organic,2024-06-09,iOS
+371,Organic,2024-06-01,Android
+372,Organic,2024-06-14,iOS
+373,Organic,2024-05-24,Android
+374,Instagram,2024-05-27,iOS
+375,Organic,2024-05-14,iOS
+376,Organic,2024-06-10,Android
+377,Instagram,2024-05-22,iOS
+378,Organic,2024-05-14,iOS
+379,Instagram,2024-05-23,iOS
+380,Organic,2024-05-25,Android
+381,Organic,2024-05-22,iOS
+382,Instagram,2024-05-26,iOS
+383,Google Ads,2024-05-30,Android
+384,Instagram,2024-05-21,iOS
+385,Instagram,2024-06-09,Android
+386,Instagram,2024-05-15,iOS
+387,Organic,2024-06-01,Android
+388,Organic,2024-05-18,iOS
+389,Instagram,2024-06-08,Android
+390,Instagram,2024-05-14,iOS
+391,TikTok,2024-06-10,iOS
+392,Google Ads,2024-05-15,iOS
+393,Organic,2024-05-28,iOS
+394,Instagram,2024-06-11,iOS
+395,Organic,2024-05-14,iOS
+396,TikTok,2024-05-29,Android
+397,Instagram,2024-05-24,iOS
+398,Google Ads,2024-06-16,iOS
+399,Instagram,2024-05-13,Android
+400,Instagram,2024-05-27,Android
+401,Organic,2024-06-07,iOS
+402,TikTok,2024-06-02,iOS
+403,Google Ads,2024-06-12,iOS
+404,Instagram,2024-06-06,Android
+405,Organic,2024-06-04,Android
+406,Instagram,2024-06-05,iOS
+407,Organic,2024-06-09,Android
+408,Organic,2024-06-02,Android
+409,TikTok,2024-05-30,Android
+410,Organic,2024-06-16,Android
+411,Organic,2024-05-21,iOS
+412,TikTok,2024-06-11,iOS
+413,TikTok,2024-06-15,iOS
+414,Google Ads,2024-06-13,iOS
+415,Google Ads,2024-05-15,iOS
+416,Google Ads,2024-05-15,Android
+417,Organic,2024-06-09,iOS
+418,Organic,2024-05-27,iOS
+419,Instagram,2024-06-04,iOS
+420,Instagram,2024-05-23,Android
+421,Instagram,2024-06-13,iOS
+422,Instagram,2024-06-14,iOS
+423,Organic,2024-06-05,iOS
+424,Google Ads,2024-06-15,iOS
+425,Organic,2024-06-09,Android
+426,Google Ads,2024-05-19,Android
+427,Google Ads,2024-05-16,iOS
+428,Instagram,2024-05-13,Android
+429,Organic,2024-05-13,Android
+430,Organic,2024-06-01,Android
+431,Organic,2024-05-31,iOS
+432,Instagram,2024-06-10,iOS
+433,Google Ads,2024-05-22,iOS
+434,Organic,2024-05-30,Android
+435,Organic,2024-06-09,iOS
+436,Instagram,2024-06-16,iOS
+437,Organic,2024-06-12,iOS
+438,Instagram,2024-06-08,Android
+439,Instagram,2024-05-23,iOS
+440,Organic,2024-05-17,Android
+441,Organic,2024-05-20,Android
+442,TikTok,2024-06-15,iOS
+443,Organic,2024-05-24,Android
+444,Organic,2024-05-13,iOS
+445,Instagram,2024-06-12,Android
+446,TikTok,2024-05-16,iOS
+447,TikTok,2024-05-17,Android
+448,Instagram,2024-06-11,Android
+449,Organic,2024-06-05,Android
+450,Organic,2024-05-15,Android
+451,Instagram,2024-05-23,iOS
+452,Google Ads,2024-05-16,Android
+453,Google Ads,2024-06-07,Android
+454,TikTok,2024-06-08,Android
+455,Organic,2024-06-08,iOS
+456,Google Ads,2024-05-18,Android
+457,Organic,2024-05-27,Android
+458,Google Ads,2024-06-11,Android
+459,Organic,2024-06-16,iOS
+460,Organic,2024-06-04,Android
+461,Organic,2024-05-18,iOS
+462,Google Ads,2024-05-16,Android
+463,Instagram,2024-05-30,iOS
+464,Google Ads,2024-05-21,Android
+465,TikTok,2024-06-10,Android
+466,Organic,2024-05-25,iOS
+467,Organic,2024-05-29,Android
+468,Instagram,2024-06-13,iOS
+469,Organic,2024-06-03,Android
+470,TikTok,2024-05-16,Android
+471,Organic,2024-05-17,Android
+472,TikTok,2024-05-25,Android
+473,Organic,2024-06-15,Android
+474,Instagram,2024-06-03,iOS
+475,Google Ads,2024-06-04,iOS
+476,TikTok,2024-05-15,Android
+477,Organic,2024-06-15,Android
+478,Google Ads,2024-06-13,Android
+479,TikTok,2024-06-02,Android
+480,Google Ads,2024-06-02,iOS
+481,Google Ads,2024-05-23,Android
+482,Instagram,2024-05-16,iOS
+483,Google Ads,2024-05-13,iOS
+484,Google Ads,2024-06-09,iOS
+485,Google Ads,2024-06-05,iOS
+486,TikTok,2024-06-16,iOS
+487,Organic,2024-05-25,iOS
+488,Organic,2024-06-15,Android
+489,TikTok,2024-05-23,iOS
+490,Instagram,2024-05-29,iOS
+491,Google Ads,2024-06-16,iOS
+492,Google Ads,2024-05-30,iOS
+493,Organic,2024-06-03,iOS
+494,Organic,2024-06-05,iOS
+495,Google Ads,2024-05-31,Android
+496,Organic,2024-06-02,Android
+497,Google Ads,2024-05-20,Android
+498,Organic,2024-06-09,iOS
+499,TikTok,2024-05-17,iOS
+500,TikTok,2024-05-29,Android
+501,Instagram,2024-05-31,iOS
+502,Google Ads,2024-06-08,iOS
+503,Organic,2024-06-15,iOS
+504,Instagram,2024-05-23,iOS
+505,Instagram,2024-05-24,iOS
+506,Organic,2024-06-02,iOS
+507,TikTok,2024-05-23,Android
+508,Instagram,2024-06-09,iOS
+509,TikTok,2024-05-17,Android
+510,Instagram,2024-05-29,Android
+511,Google Ads,2024-06-01,Android
+512,Google Ads,2024-05-24,Android
+513,TikTok,2024-05-18,Android
+514,Instagram,2024-05-29,iOS
+515,Organic,2024-05-31,iOS
+516,Organic,2024-06-07,iOS
+517,Organic,2024-06-13,Android
+518,Instagram,2024-05-18,Android
+519,TikTok,2024-05-23,iOS
+520,Organic,2024-06-14,Android
+521,Google Ads,2024-06-05,iOS
+522,Organic,2024-06-04,Android
+523,TikTok,2024-05-27,iOS
+524,Instagram,2024-06-08,iOS
+525,Instagram,2024-05-23,iOS
+526,Google Ads,2024-05-29,iOS
+527,Google Ads,2024-05-26,iOS
+528,Organic,2024-06-08,iOS
+529,Organic,2024-05-30,Android
+530,Instagram,2024-06-09,iOS
+531,Instagram,2024-05-16,iOS
+532,TikTok,2024-05-19,Android
+533,TikTok,2024-06-16,Android
+534,Google Ads,2024-05-21,iOS
+535,Instagram,2024-05-20,iOS
+536,TikTok,2024-05-29,iOS
+537,Instagram,2024-05-29,iOS
+538,Organic,2024-06-14,Android
+539,Google Ads,2024-06-13,iOS
+540,Organic,2024-05-20,iOS
+541,TikTok,2024-05-31,Android
+542,Google Ads,2024-05-15,iOS
+543,Organic,2024-05-17,Android
+544,Instagram,2024-05-25,iOS
+545,Google Ads,2024-06-12,Android
+546,Organic,2024-05-28,iOS
+547,Organic,2024-06-13,Android
+548,Instagram,2024-06-03,Android
+549,Google Ads,2024-06-10,iOS
+550,Instagram,2024-06-03,Android
+551,Google Ads,2024-05-15,Android
+552,Instagram,2024-05-22,Android
+553,Google Ads,2024-06-02,Android
+554,Google Ads,2024-05-28,Android
+555,Instagram,2024-05-24,iOS
+556,Google Ads,2024-05-14,iOS
+557,Organic,2024-06-05,Android
+558,Organic,2024-06-16,iOS
+559,Instagram,2024-06-11,Android
+560,Google Ads,2024-06-11,Android
+561,Instagram,2024-06-16,iOS
+562,Organic,2024-05-31,iOS
+563,Organic,2024-05-20,Android
+564,Organic,2024-06-07,iOS
+565,Organic,2024-05-19,Android
+566,Google Ads,2024-06-11,iOS
+567,Organic,2024-05-19,Android
+568,Google Ads,2024-05-15,iOS
+569,TikTok,2024-05-13,Android
+570,Organic,2024-06-06,iOS
+571,Google Ads,2024-05-13,Android
+572,Instagram,2024-05-27,iOS
+573,Organic,2024-05-25,Android
+574,Google Ads,2024-05-20,Android
+575,Instagram,2024-05-17,iOS
+576,TikTok,2024-05-21,iOS
+577,Organic,2024-05-13,iOS
+578,TikTok,2024-06-16,Android
+579,Google Ads,2024-05-14,Android
+580,Organic,2024-06-04,iOS
+581,Google Ads,2024-05-21,iOS
+582,TikTok,2024-06-15,iOS
+583,Google Ads,2024-05-26,Android
+584,Organic,2024-05-16,iOS
+585,Google Ads,2024-06-11,Android
+586,Organic,2024-06-12,iOS
+587,Organic,2024-05-23,Android
+588,Organic,2024-06-16,iOS
+589,Organic,2024-05-20,iOS
+590,Organic,2024-05-15,Android
+591,Organic,2024-05-26,Android
+592,Google Ads,2024-05-25,Android
+593,Organic,2024-06-13,iOS
+594,Organic,2024-06-15,iOS
+595,Instagram,2024-05-31,Android
+596,Google Ads,2024-05-28,Android
+597,Instagram,2024-05-14,iOS
+598,Organic,2024-05-29,iOS
+599,Organic,2024-06-15,iOS
+600,Organic,2024-05-28,Android
+601,Organic,2024-05-14,iOS
+602,Organic,2024-05-14,iOS
+603,Organic,2024-06-07,iOS
+604,Organic,2024-05-25,iOS
+605,Organic,2024-06-12,iOS
+606,Google Ads,2024-06-15,iOS
+607,Organic,2024-05-15,iOS
+608,Organic,2024-05-20,Android
+609,Google Ads,2024-06-04,iOS
+610,Instagram,2024-05-26,iOS
+611,Organic,2024-06-08,Android
+612,Instagram,2024-06-10,Android
+613,Google Ads,2024-05-13,iOS
+614,Organic,2024-05-29,iOS
+615,Instagram,2024-06-11,iOS
+616,TikTok,2024-05-25,Android
+617,Organic,2024-06-02,Android
+618,Organic,2024-05-31,Android
+619,Instagram,2024-05-31,Android
+620,Instagram,2024-06-06,Android
+621,Organic,2024-06-03,iOS
+622,Organic,2024-06-12,iOS
+623,Organic,2024-05-29,Android
+624,Google Ads,2024-06-04,Android
+625,Google Ads,2024-06-13,iOS
+626,Organic,2024-05-22,Android
+627,Google Ads,2024-05-22,iOS
+628,Instagram,2024-05-20,iOS
+629,Organic,2024-06-01,iOS
+630,Organic,2024-06-13,iOS
+631,Instagram,2024-05-26,Android
+632,Instagram,2024-06-09,iOS
+633,Google Ads,2024-06-05,Android
+634,Google Ads,2024-05-27,Android
+635,Organic,2024-06-03,Android
+636,Google Ads,2024-06-11,iOS
+637,Google Ads,2024-05-16,iOS
+638,Organic,2024-05-25,iOS
+639,Organic,2024-06-04,Android
+640,Organic,2024-05-20,Android
+641,Organic,2024-05-30,iOS
+642,Organic,2024-05-24,Android
+643,Organic,2024-06-12,iOS
+644,Organic,2024-05-26,Android
+645,Organic,2024-06-15,iOS
+646,Instagram,2024-05-30,Android
+647,Google Ads,2024-06-15,iOS
+648,Instagram,2024-05-23,Android
+649,Instagram,2024-05-24,Android
+650,Google Ads,2024-05-27,Android
+651,Organic,2024-06-12,iOS
+652,Google Ads,2024-06-10,iOS
+653,Google Ads,2024-06-07,iOS
+654,Instagram,2024-05-30,iOS
+655,Google Ads,2024-06-13,iOS
+656,Organic,2024-06-03,Android
+657,Organic,2024-05-29,Android
+658,Organic,2024-06-04,iOS
+659,Google Ads,2024-06-05,iOS
+660,Google Ads,2024-05-20,iOS
+661,Organic,2024-05-18,Android
+662,TikTok,2024-05-17,iOS
+663,Google Ads,2024-06-10,Android
+664,Organic,2024-06-09,iOS
+665,Organic,2024-05-23,Android
+666,Organic,2024-05-13,Android
+667,Organic,2024-05-31,iOS
+668,Organic,2024-05-21,Android
+669,Organic,2024-06-08,iOS
+670,Organic,2024-06-15,Android
+671,Organic,2024-05-16,iOS
+672,Instagram,2024-05-30,Android
+673,Organic,2024-05-27,Android
+674,Google Ads,2024-05-25,Android
+675,Google Ads,2024-05-31,Android
+676,TikTok,2024-05-18,iOS
+677,Organic,2024-05-24,iOS
+678,Organic,2024-05-29,iOS
+679,TikTok,2024-06-04,iOS
+680,Instagram,2024-06-07,Android
+681,Instagram,2024-06-10,iOS
+682,Organic,2024-06-14,Android
+683,Organic,2024-06-08,Android
+684,Instagram,2024-06-06,Android
+685,TikTok,2024-05-22,iOS
+686,Google Ads,2024-06-04,Android
+687,Google Ads,2024-06-02,Android
+688,Organic,2024-06-02,iOS
+689,Instagram,2024-05-25,Android
+690,Organic,2024-06-14,Android
+691,Organic,2024-06-05,iOS
+692,Google Ads,2024-05-23,iOS
+693,Google Ads,2024-05-29,iOS
+694,Organic,2024-05-16,iOS
+695,Organic,2024-06-06,iOS
+696,Google Ads,2024-06-11,iOS
+697,Organic,2024-05-21,iOS
+698,Google Ads,2024-06-02,iOS
+699,Organic,2024-06-01,Android
+700,Google Ads,2024-05-31,iOS
+701,Google Ads,2024-05-31,Android
+702,Organic,2024-05-24,iOS
+703,Organic,2024-05-29,iOS
+704,Organic,2024-06-09,iOS
+705,Organic,2024-06-16,iOS
+706,TikTok,2024-05-30,iOS
+707,Organic,2024-05-26,Android
+708,Instagram,2024-06-16,iOS
+709,Organic,2024-05-19,Android
+710,Instagram,2024-05-25,Android
+711,Instagram,2024-05-30,iOS
+712,Google Ads,2024-05-25,iOS
+713,Google Ads,2024-06-12,Android
+714,Google Ads,2024-05-14,iOS
+715,Organic,2024-05-28,iOS
+716,TikTok,2024-05-21,Android
+717,Instagram,2024-05-21,iOS
+718,TikTok,2024-05-23,Android
+719,Organic,2024-06-03,Android
+720,Instagram,2024-06-14,iOS
+721,TikTok,2024-06-04,iOS
+722,Organic,2024-06-15,iOS
+723,Organic,2024-05-21,iOS
+724,Instagram,2024-06-05,iOS
+725,Google Ads,2024-05-20,Android
+726,Instagram,2024-05-19,iOS
+727,Organic,2024-05-30,iOS
+728,Instagram,2024-05-15,Android
+729,Organic,2024-06-09,Android
+730,Organic,2024-05-18,Android
+731,Organic,2024-06-02,iOS
+732,Instagram,2024-06-09,Android
+733,Instagram,2024-05-13,iOS
+734,Google Ads,2024-06-02,iOS
+735,Organic,2024-06-16,iOS
+736,Instagram,2024-05-25,Android
+737,Organic,2024-05-22,iOS
+738,Instagram,2024-05-22,iOS
+739,Google Ads,2024-05-25,iOS
+740,Organic,2024-06-05,iOS
+741,Google Ads,2024-05-14,Android
+742,Organic,2024-06-03,Android
+743,Instagram,2024-05-29,Android
+744,Google Ads,2024-05-26,iOS
+745,Organic,2024-05-22,iOS
+746,Instagram,2024-06-16,iOS
+747,Organic,2024-06-06,iOS
+748,Google Ads,2024-05-15,iOS
+749,TikTok,2024-05-29,Android
+750,Google Ads,2024-05-24,iOS
+751,Organic,2024-06-05,iOS
+752,TikTok,2024-06-10,iOS
+753,Google Ads,2024-06-06,iOS
+754,Organic,2024-06-07,iOS
+755,Organic,2024-05-13,Android
+756,Instagram,2024-06-01,Android
+757,Google Ads,2024-06-09,Android
+758,Google Ads,2024-05-28,iOS
+759,Instagram,2024-05-29,iOS
+760,Instagram,2024-06-09,iOS
+761,Organic,2024-05-24,iOS
+762,Organic,2024-06-08,Android
+763,Organic,2024-06-11,iOS
+764,Instagram,2024-06-15,iOS
+765,Organic,2024-05-18,iOS
+766,Google Ads,2024-05-19,iOS
+767,Instagram,2024-06-13,Android
+768,Instagram,2024-06-13,iOS
+769,Organic,2024-06-06,iOS
+770,Instagram,2024-06-14,iOS
+771,Organic,2024-05-19,iOS
+772,Instagram,2024-05-24,Android
+773,Organic,2024-05-28,Android
+774,Organic,2024-05-28,Android
+775,Instagram,2024-05-25,Android
+776,Organic,2024-05-19,iOS
+777,Organic,2024-05-21,Android
+778,Instagram,2024-06-13,iOS
+779,Instagram,2024-05-23,iOS
+780,Google Ads,2024-05-20,Android
+781,Instagram,2024-06-14,iOS
+782,Google Ads,2024-06-04,Android
+783,Organic,2024-06-06,iOS
+784,Organic,2024-05-20,Android
+785,Organic,2024-06-03,Android
+786,TikTok,2024-05-16,Android
+787,Google Ads,2024-05-15,Android
+788,Google Ads,2024-06-10,Android
+789,Google Ads,2024-06-10,iOS
+790,TikTok,2024-06-15,iOS
+791,Organic,2024-06-15,iOS
+792,Google Ads,2024-06-09,Android
+793,Google Ads,2024-05-25,iOS
+794,Google Ads,2024-05-27,Android
+795,Organic,2024-06-04,iOS
+796,Instagram,2024-06-07,iOS
+797,TikTok,2024-05-16,Android
+798,Google Ads,2024-06-07,iOS
+799,Instagram,2024-05-21,iOS
+800,TikTok,2024-05-17,iOS
+801,Instagram,2024-06-13,Android
+802,Organic,2024-06-01,Android
+803,Google Ads,2024-05-23,iOS
+804,Google Ads,2024-05-27,iOS
+805,Google Ads,2024-06-13,iOS
+806,Instagram,2024-06-09,Android
+807,TikTok,2024-06-03,Android
+808,TikTok,2024-05-29,iOS
+809,Google Ads,2024-06-07,iOS
+810,Organic,2024-05-19,iOS
+811,TikTok,2024-06-07,Android
+812,Instagram,2024-06-06,Android
+813,Organic,2024-05-22,iOS
+814,TikTok,2024-05-31,iOS
+815,Instagram,2024-05-23,iOS
+816,Google Ads,2024-05-25,Android
+817,Google Ads,2024-05-20,iOS
+818,Organic,2024-05-16,Android
+819,Organic,2024-06-12,Android
+820,Organic,2024-06-09,iOS
+821,Instagram,2024-05-23,iOS
+822,Organic,2024-05-13,iOS
+823,Organic,2024-06-05,Android
+824,Organic,2024-06-12,Android
+825,Google Ads,2024-06-07,Android
+826,TikTok,2024-05-17,iOS
+827,Organic,2024-06-01,iOS
+828,Organic,2024-05-23,Android
+829,Instagram,2024-06-14,Android
+830,Google Ads,2024-06-08,iOS
+831,Organic,2024-06-15,Android
+832,Google Ads,2024-05-27,Android
+833,Organic,2024-06-13,Android
+834,Organic,2024-06-02,Android
+835,Google Ads,2024-05-17,Android
+836,Google Ads,2024-05-18,Android
+837,TikTok,2024-06-03,iOS
+838,Organic,2024-05-30,iOS
+839,Google Ads,2024-05-26,Android
+840,Google Ads,2024-05-22,iOS
+841,Organic,2024-05-25,iOS
+842,Instagram,2024-06-12,iOS
+843,Organic,2024-06-11,iOS
+844,TikTok,2024-05-15,Android
+845,Organic,2024-06-11,Android
+846,Google Ads,2024-05-18,iOS
+847,Organic,2024-06-10,iOS
+848,TikTok,2024-05-20,iOS
+849,Google Ads,2024-06-14,Android
+850,Google Ads,2024-05-29,Android
+851,Organic,2024-05-23,iOS
+852,Instagram,2024-05-25,Android
+853,Organic,2024-05-23,Android
+854,Instagram,2024-06-12,Android
+855,Organic,2024-06-09,Android
+856,Organic,2024-05-18,iOS
+857,Organic,2024-05-28,Android
+858,Google Ads,2024-05-16,iOS
+859,Google Ads,2024-06-16,Android
+860,Organic,2024-06-07,Android
+861,Instagram,2024-05-24,Android
+862,Google Ads,2024-05-23,Android
+863,Google Ads,2024-06-06,iOS
+864,Google Ads,2024-05-30,iOS
+865,Google Ads,2024-05-31,Android
+866,Google Ads,2024-06-04,Android
+867,Organic,2024-05-30,iOS
+868,Organic,2024-06-07,iOS
+869,Instagram,2024-05-18,iOS
+870,TikTok,2024-05-16,Android
+871,Organic,2024-06-10,Android
+872,Organic,2024-06-15,iOS
+873,Google Ads,2024-05-29,iOS
+874,Google Ads,2024-05-28,Android
+875,Organic,2024-05-14,Android
+876,Organic,2024-06-15,iOS
+877,Instagram,2024-05-20,Android
+878,Instagram,2024-05-25,iOS
+879,Organic,2024-05-20,iOS
+880,Organic,2024-06-11,Android
+881,Organic,2024-06-13,Android
+882,Instagram,2024-06-11,Android
+883,Organic,2024-05-13,Android
+884,Organic,2024-05-29,Android
+885,Instagram,2024-06-01,iOS
+886,Organic,2024-06-05,iOS
+887,Instagram,2024-06-03,iOS
+888,Organic,2024-06-10,iOS
+889,Organic,2024-06-03,Android
+890,Organic,2024-05-21,Android
+891,Instagram,2024-05-22,iOS
+892,Instagram,2024-06-09,iOS
+893,Instagram,2024-06-09,Android
+894,Organic,2024-06-02,iOS
+895,Instagram,2024-06-05,Android
+896,Organic,2024-05-14,Android
+897,Organic,2024-05-20,Android
+898,Instagram,2024-06-08,iOS
+899,Organic,2024-06-03,iOS
+900,Organic,2024-06-08,Android
+901,Organic,2024-06-10,Android
+902,Organic,2024-05-15,iOS
+903,Organic,2024-05-25,Android
+904,Google Ads,2024-05-22,iOS
+905,Google Ads,2024-05-21,Android
+906,Instagram,2024-06-08,iOS
+907,Instagram,2024-06-15,Android
+908,Organic,2024-05-13,iOS
+909,Organic,2024-06-13,iOS
+910,Organic,2024-06-06,iOS
+911,Google Ads,2024-06-10,iOS
+912,Organic,2024-05-19,Android
+913,Google Ads,2024-05-15,Android
+914,Google Ads,2024-06-01,iOS
+915,Google Ads,2024-06-01,iOS
+916,Google Ads,2024-06-11,Android
+917,Organic,2024-06-16,Android
+918,TikTok,2024-06-16,Android
+919,Instagram,2024-06-08,iOS
+920,Organic,2024-06-07,iOS
+921,Instagram,2024-05-26,Android
+922,Google Ads,2024-05-29,iOS
+923,Instagram,2024-05-30,Android
+924,Instagram,2024-06-10,iOS
+925,Google Ads,2024-06-01,Android
+926,Organic,2024-06-08,iOS
+927,Organic,2024-05-30,Android
+928,Google Ads,2024-05-16,iOS
+929,Google Ads,2024-05-13,Android
+930,Organic,2024-05-13,iOS
+931,Organic,2024-06-07,Android
+932,Instagram,2024-06-01,Android
+933,TikTok,2024-06-04,Android
+934,Google Ads,2024-05-22,Android
+935,Organic,2024-05-23,Android
+936,Organic,2024-05-17,Android
+937,Organic,2024-05-13,iOS
+938,TikTok,2024-05-29,Android
+939,Organic,2024-06-03,iOS
+940,Google Ads,2024-06-15,iOS
+941,Organic,2024-06-10,iOS
+942,Google Ads,2024-05-16,iOS
+943,Instagram,2024-05-17,Android
+944,Instagram,2024-05-23,Android
+945,Organic,2024-06-02,Android
+946,Organic,2024-06-16,iOS
+947,Organic,2024-05-24,iOS
+948,TikTok,2024-06-07,iOS
+949,Instagram,2024-05-31,iOS
+950,Google Ads,2024-05-19,iOS
+951,Google Ads,2024-05-19,iOS
+952,Instagram,2024-06-07,iOS
+953,Organic,2024-05-17,Android
+954,TikTok,2024-06-02,Android
+955,Google Ads,2024-05-26,Android
+956,Organic,2024-05-16,Android
+957,Google Ads,2024-06-04,Android
+958,Organic,2024-06-01,iOS
+959,Organic,2024-05-27,Android
+960,Instagram,2024-06-10,Android
+961,Organic,2024-05-20,iOS
+962,Google Ads,2024-05-31,iOS
+963,Organic,2024-06-09,Android
+964,Organic,2024-06-08,iOS
+965,Organic,2024-05-16,Android
+966,Organic,2024-05-27,Android
+967,Instagram,2024-06-16,iOS
+968,Organic,2024-05-13,iOS
+969,Google Ads,2024-05-15,iOS
+970,Google Ads,2024-06-05,iOS
+971,Instagram,2024-06-08,iOS
+972,TikTok,2024-06-15,Android
+973,Instagram,2024-06-10,iOS
+974,Organic,2024-06-05,iOS
+975,Organic,2024-06-05,iOS
+976,Organic,2024-05-16,Android
+977,Google Ads,2024-05-15,iOS
+978,Organic,2024-06-15,iOS
+979,Google Ads,2024-06-04,Android
+980,Google Ads,2024-06-04,Android
+981,Organic,2024-05-17,iOS
+982,Instagram,2024-06-12,Android
+983,Organic,2024-05-18,iOS
+984,Organic,2024-05-22,iOS
+985,Instagram,2024-05-19,iOS
+986,Google Ads,2024-06-02,iOS
+987,Instagram,2024-06-01,Android
+988,Google Ads,2024-05-15,iOS
+989,Organic,2024-06-03,iOS
+990,Instagram,2024-05-16,Android
+991,Instagram,2024-06-09,Android
+992,Instagram,2024-05-24,iOS
+993,Organic,2024-05-17,Android
+994,Google Ads,2024-05-25,iOS
+995,Organic,2024-06-04,Android
+996,Organic,2024-06-11,Android
+997,TikTok,2024-06-06,Android
+998,Organic,2024-06-08,iOS
+999,TikTok,2024-05-26,iOS
+1000,Google Ads,2024-05-28,iOS

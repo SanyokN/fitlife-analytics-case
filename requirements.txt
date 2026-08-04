@@ -1,0 +1,15 @@
+# Data Manipulation & Analysis
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Data Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Statistical Testing (for A/B Test analysis & Confidence Intervals)
+statsmodels>=0.14.0
+scipy>=1.10.0
+
+# Jupyter Notebook Environment
+jupyterlab>=4.0.0
+notebook>=7.0.0

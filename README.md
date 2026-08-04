@@ -103,7 +103,7 @@ plt.savefig('visuals/retention_heatmap.png', dpi=300, bbox_inches='tight')
 
 ### Retention Heatmap
 
-![Retention Heatmap](retention_heatmap_weekly.png)
+![Retention Heatmap](visuals/retention_heatmap_weekly.png)
 
 ### Key Insights
 - The steepest drop occurs immediately after onboarding, with **Week 1 Retention dropping to ~32–41%** across cohorts (a ~60% user churn in the first 7 days).

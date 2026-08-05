@@ -2,8 +2,8 @@ WITH user_first_activity AS (
     -- 1. Determine the first activity date and month (cohort) for each user
     SELECT 
         user_id,
-        DATE_TRUNC('month', MIN(created_at::date))::date AS cohort_month
-    FROM events
+        DATE_TRUNC('month', MIN(event_date::date))::date AS cohort_month
+    FROM activity
     GROUP BY user_id
 ),
 
@@ -11,8 +11,8 @@ user_activities AS (
     -- 2. Extract all unique active months for each user
     SELECT DISTINCT
         user_id,
-        DATE_TRUNC('month', created_at::date)::date AS activity_month
-    FROM events
+        DATE_TRUNC('month', event_date::date)::date AS activity_month
+    FROM activity
 ),
 
 cohort_sizes AS (

@@ -2,8 +2,8 @@ WITH user_first_activity AS (
     -- 1. Determine the first activity date and week (cohort) for each user
     SELECT 
         user_id,
-        DATE_TRUNC('week', MIN(created_at::date))::date AS cohort_week
-    FROM events
+        DATE_TRUNC('week', MIN(event_date::date))::date AS cohort_week
+    FROM activity
     GROUP BY user_id
 ),
 
@@ -11,8 +11,8 @@ user_activities AS (
     -- 2. Extract all unique active weeks for each user
     SELECT DISTINCT
         user_id,
-        DATE_TRUNC('week', created_at::date)::date AS activity_week
-    FROM events
+        DATE_TRUNC('week', event_date::date)::date AS activity_week
+    FROM activity
 ),
 
 cohort_sizes AS (

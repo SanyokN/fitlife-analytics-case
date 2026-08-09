@@ -56,7 +56,7 @@ ORDER BY total_users DESC;
 ```
 
 ### Funnel Results
-<img width="1022" height="135" alt="image" src="https://github.com/user-attachments/assets/d1b4c781-46f1-4c07-b1d9-a050f34b21ed" />
+<img width="932" height="135" alt="funnel_results" src="https://github.com/user-attachments/assets/d2c92a25-422b-4556-845e-08e88c361b9d" />
 
 &nbsp;
 

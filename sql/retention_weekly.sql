@@ -1,44 +1,38 @@
 WITH user_first_activity AS (
-    -- 1. Determine the first activity date and week (cohort) for each user
     SELECT 
         user_id,
         DATE_TRUNC('week', MIN(event_date::date))::date AS cohort_week
     FROM activity
     GROUP BY user_id
 ),
-
-user_activities AS (
-    -- 2. Extract all unique active weeks for each user
-    SELECT DISTINCT
-        user_id,
-        DATE_TRUNC('week', event_date::date)::date AS activity_week
-    FROM activity
-),
-
 cohort_sizes AS (
-    -- 3. Calculate the total size of each cohort (Week 0)
     SELECT 
         cohort_week,
         COUNT(DISTINCT user_id) AS cohort_size
     FROM user_first_activity
     GROUP BY cohort_week
+),
+weeks_grid AS (
+    SELECT 
+        cs.cohort_week,
+        cs.cohort_size,
+        w.week_number
+    FROM cohort_sizes cs
+    CROSS JOIN generate_series(0, 8) AS w(week_number)
 )
-
--- 4. Aggregate data and calculate Retention Rate %
 SELECT 
-    f.cohort_week,
-    cs.cohort_size,
-    -- Difference in weeks between activity week and registration week
-    ((a.activity_week - f.cohort_week) / 7)::int AS week_number,
-    COUNT(DISTINCT f.user_id) AS active_users,
+    g.cohort_week,
+    g.cohort_size,
+    g.week_number,
+    COUNT(DISTINCT t.user_id) AS active_paying_users,
     ROUND(
-        COUNT(DISTINCT f.user_id)::numeric / cs.cohort_size * 100, 2
+        COALESCE(COUNT(DISTINCT t.user_id)::numeric / NULLIF(g.cohort_size, 0) * 100, 0), 2
     ) AS retention_rate_pct
-FROM user_first_activity f
-JOIN user_activities a 
-    ON f.user_id = a.user_id 
-   AND a.activity_week >= f.cohort_week
-JOIN cohort_sizes cs 
-    ON f.cohort_week = cs.cohort_week
-GROUP BY 1, 2, 3
-ORDER BY 1, 3;
+FROM weeks_grid g
+JOIN user_first_activity f ON f.cohort_week = g.cohort_week
+LEFT JOIN transactions t 
+    ON f.user_id = t.user_id
+   AND t.payment_status = 'completed'
+   AND DATE_TRUNC('week', t.payment_date::date)::date = g.cohort_week + (g.week_number * INTERVAL '1 week')
+GROUP BY g.cohort_week, g.cohort_size, g.week_number
+ORDER BY g.cohort_week, g.week_number;

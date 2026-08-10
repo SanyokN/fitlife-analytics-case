@@ -75,29 +75,36 @@ ORDER BY total_users DESC;
 plt.figure(figsize=(10, 5), dpi=300)
 sns.set_theme(style="white")
 
-# 1. Plot Heatmap using Seaborn
+# 1. Heatmap Construction (vmax capped at 50)
 ax = sns.heatmap(
     cohort_pivot, 
     annot=True, 
     fmt=".1f", 
     cmap="Blues", 
     vmin=0, 
-    vmax=100,
+    vmax=50,  # Cap color bar range at 50%
     linewidths=1, 
     linecolor='white',
     cbar_kws={'label': '% Retention'},
     annot_kws={"size": 11, "weight": "bold"}
 )
 
-# 2. Append '%' symbol to heatmap cell values
+# 2. Title & Axis Customization
+plt.title('Weekly Retention Rate (%) by User Cohorts', fontsize=14, fontweight='bold', pad=20)
+plt.xlabel('User Lifecycle Stage (Weeks)', fontsize=11, fontweight='bold', labelpad=10)
+plt.ylabel('Registration Cohort', fontsize=11, fontweight='bold', labelpad=10)
+
+# 3. Add % Sign to Cell Values
 for text in ax.texts:
     val = text.get_text()
     if val != 'nan':
         text.set_text(f"{val}%")
 
-# Styling & Export
-plt.title('Weekly Retention Rate (%) by User Cohorts', fontsize=14, fontweight='bold', pad=20)
-plt.savefig('visuals/retention_heatmap.png', dpi=300, bbox_inches='tight')
+plt.tight_layout()
+
+# 4. Save & Display
+plt.savefig('retention_heatmap_weekly.png', dpi=300, bbox_inches='tight')
+plt.show()
 ```
 
 ### Retention Heatmap

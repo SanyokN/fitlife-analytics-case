@@ -135,7 +135,7 @@ romi_raw = ((ltv_raw - cac_raw) / cac_raw) * 100 if cac_raw > 0 else 0
 | **Trial-to-Paid CR** | `CR_trial_to_paid` | **~12.5%** | Baseline paywall conversion |
 | **AOV** | `AOV` | **$9.99** | Monthly subscription price |
 | **Customer Lifespan** | `lifespan` | **4.2 months** | Average active lifetime before churn |
-| **Lifetime Value** | `LTV` | **$41.95** | AOV * Lifespan * Gross Margin (100%) |
+| **Lifetime Value** | `LTV` | **$41.96** | AOV * Lifespan * Gross Margin (100%) |
 | **Customer Acquisition Cost** | `CAC` | **$30.00** | $\frac{\text{Ad Budget}}{\text{Buyers}}$ |
 
 **Note on LTV**: Calculated as AOV * Lifespan * Gross Margin. Gross Margin is assumed to be **100%** (pure marginal revenue per user) for unit economics modeling.

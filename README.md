@@ -29,28 +29,27 @@ The dataset is synthetic for SQL logic but scaled to FitLife’s real annual tra
 ## Funnel Analysis (SQL)
 ### SQL Query
 ```sql
-WITH trial_users AS (
-    SELECT user_id
-    FROM activity
-    WHERE event_name = 'trial_activated'
-    GROUP BY user_id
-),
-paying_users AS (
-    SELECT user_id
-    FROM transactions
-    WHERE payment_status = 'completed'
-    GROUP BY user_id
-)
-SELECT
+-- Calculate funnel conversion rates (Registration -> Trial -> Paid) by traffic source
+SELECT 
     u.source,
-    COUNT(u.id) AS total_users,
-    COUNT(t.user_id) AS trial_users,
-    ROUND(COUNT(t.user_id)::numeric / COUNT(u.id) * 100, 2) AS cr_to_trial,
-    COUNT(p.user_id) AS paying_users,
-    ROUND(COUNT(p.user_id)::numeric / NULLIF(COUNT(t.user_id), 0) * 100, 2) AS cr_trial_to_paid
+    COUNT(DISTINCT u.id) AS total_users,
+    COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END) AS trials,
+    COUNT(DISTINCT CASE WHEN t.payment_status = 'completed' THEN u.id END) AS paid,
+    ROUND(
+        COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END) * 100.0 
+        / COUNT(DISTINCT u.id), 2
+    ) AS cr_to_trial,
+    ROUND(
+        COUNT(DISTINCT CASE WHEN t.payment_status = 'completed' THEN u.id END) * 100.0 
+        / NULLIF(COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END), 0), 2
+    ) AS cr_trial_to_paid
 FROM users u
-LEFT JOIN trial_users t ON u.id = t.user_id
-LEFT JOIN paying_users p ON u.id = p.user_id
+LEFT JOIN activity a 
+    ON u.id = a.user_id 
+   AND a.event_name = 'trial_activated'
+LEFT JOIN transactions t 
+    ON u.id = t.user_id 
+   AND t.payment_status = 'completed'
 GROUP BY u.source
 ORDER BY total_users DESC;
 ```

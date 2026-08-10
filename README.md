@@ -120,11 +120,11 @@ plt.show()
 ## Unit Economics
 ### Code (key parts)
 ```python
-# LTV assuming 100% Gross Margin (pure marginal revenue per subscriber)
-LTV = AOV * lifespan_months
+# Calculation of LTV
+ltv_raw = aov * lifespan_months * gross_margin
 
 # Unit ROMI based on LTV per acquired customer
-romi_pct = ((LTV - CAC) / CAC) * 100
+romi_raw = ((ltv_raw - cac_raw) / cac_raw) * 100 if cac_raw > 0 else 0
 ```
 
 ### Unit Economics Model Parameters

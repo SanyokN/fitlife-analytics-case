@@ -1,5 +1,2 @@
-# Treat Jupyter Notebooks as documentation so they don't overpower SQL
-*.ipynb linguist-documentation
-
-# Force GitHub to detect SQL files in language statistics
-*.sql linguist-detectable=true
+*.sql linguist-language=SQL
+*.ipynb linguist-detectable=true

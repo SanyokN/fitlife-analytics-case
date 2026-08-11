@@ -1,2 +1,1 @@
-# Exclude Jupyter Notebook files from Linguist language statistics
-*.ipynb linguist-vendored
+*.ipynb linguist-documentation

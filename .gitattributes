@@ -1,2 +1,2 @@
 *.sql linguist-language=SQL
-*.ipynb linguist-language=Jupyter_Notebook
+*.ipynb linguist-language=Python

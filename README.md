@@ -60,7 +60,7 @@ ORDER BY total_users DESC;
 &nbsp;
 
 > **Key Takeaway:** 
-> While **TikTok** shows critical issues in *Trial Activation* (1.67%), **Instagram** shows the strongest *Trial-to-Paid CR* (15.91%). The aggregated blended baseline **Overall CR1** across all channels is **1.50%**.
+> While **TikTok** shows critical issues in *Trial Activation* (1.67%), **Instagram** shows the strongest *Trial-to-Paid CR* (15.91%). The aggregated blended baseline **Overall CR1** across all channels is **1.53%**.
 
 ### Key Insights
 
@@ -131,7 +131,7 @@ romi_raw = ((ltv_raw - cac_raw) / cac_raw) * 100 if cac_raw > 0 else 0
 
 | Metric | Nomenclature | Value | Note / Formula |
 | :--- | :--- | :--- | :--- |
-| **Overall Conversion** | `CR1` | **1.50%** | End-to-end conversion ($\text{UA} \to \text{Paid}$) |
+| **Overall Conversion** | `CR1` | **1.53%** | End-to-end conversion ($\text{UA} \to \text{Paid}$) |
 | **Trial-to-Paid CR** | `CR_trial_to_paid` | **~12.5%** | Baseline paywall conversion |
 | **AOV** | `AOV` | **$9.99** | Monthly subscription price |
 | **Customer Lifespan** | `lifespan` | **4.2 months** | Average active lifetime before churn |
@@ -148,9 +148,9 @@ FitLife cannot scale efficiently without improving overall conversion (CR1) or r
 A redesigned Paywall will increase trial‑to‑paid conversion.
 
 ### Results
-| Group    | Sample Size (N) | Trial-to-Paid CR | Buyers  |
+| Group    | Sample Size (N) | Overall CR (CR1) | Buyers  |
 |----------|-|------------|---------|
-| Control  | 24,100 | 1.50%      | 362  |
+| Control  | 24,100 | 1.53%      | 362  |
 | Variant  | 24,350 | 1.87%      | 455  |
 
 - **Uplift**: +24.7%
@@ -168,7 +168,7 @@ By extrapolating the observed uplift (+24.7%) to our annual traffic of 1.2M user
 | **Incremental Subscribers** | **+4,440** |
 | **Additional Annual Revenue** | **+$186,258** |
 
-> **Note on Revenue Calculation:** Calculated as `4,440 incremental buyers × $41.95 LTV`.
+> **Note on Revenue Calculation:** Calculated as `4,440 incremental buyers × $41.96 LTV`.
 
 ### Conclusion
 The redesigned Paywall significantly improves trial monetization and should be rolled out globally.
@@ -177,7 +177,7 @@ The redesigned Paywall significantly improves trial monetization and should be r
 - High‑volume channels deliver weak trial activation, indicating inefficient spend.
 - Retention decays sharply after Week 1, indicating onboarding gaps.
 - LTV/CAC ≈ 1.4×, indicating limited scalability.
-- The new Paywall delivers a 24% uplift in trial-to-paid conversion, resulting in approximately $186k in additional annual revenue.
+- The new Paywall delivers a 24.7% uplift in trial-to-paid conversion, resulting in approximately $186k in additional annual revenue.
 
 ## Recommendations
 - Roll out the new Paywall.

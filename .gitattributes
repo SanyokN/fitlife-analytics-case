@@ -1,1 +1,5 @@
-*.ipynb linguist-documentation
+# Exclude Jupyter Notebooks from language statistics
+*.ipynb linguist-vendored
+
+# Force GitHub to detect SQL files in language statistics
+*.sql linguist-detectable=true

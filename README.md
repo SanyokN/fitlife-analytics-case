@@ -193,6 +193,8 @@ fitlife-analytics/
 │   ├── users.csv
 │   ├── activity.csv
 │   └── transactions.csv
+├── presentation/
+│   └── FitLife Analytics Presentation.pdf
 ├── sql/
 │   ├── funnel_analysis.sql
 │   ├── retention_weekly.sql
@@ -204,7 +206,7 @@ fitlife-analytics/
 ├── visuals/
 │   ├── funnel_results.png
 │   ├── retention_heatmap.png
-│   └── paywall_ab_test.png 
+│   └── paywall_ab_test.png
 ├── .gitignore
 ├── README.md                  
 └── requirements.txt

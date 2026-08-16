@@ -207,6 +207,7 @@ fitlife-analytics/
 │   ├── funnel_results.png
 │   ├── retention_heatmap.png
 │   └── paywall_ab_test.png
+├── .gitattributes
 ├── .gitignore
 ├── README.md                  
 └── requirements.txt

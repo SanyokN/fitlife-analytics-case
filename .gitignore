@@ -17,3 +17,6 @@ env/
 # OS generated files
 .DS_Store
 Thumbs.dbS
+
+# Repomix generated files
+repomix-output.xml

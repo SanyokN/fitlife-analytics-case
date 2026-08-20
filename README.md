@@ -211,6 +211,7 @@ fitlife-analytics/
 │   ├── ab_test_analysis.ipynb
 │   └── unit_economics.ipynb
 ├── visuals/
+│   ├── dashboard_overview.png
 │   ├── funnel_results.png
 │   ├── retention_heatmap.png
 │   └── paywall_ab_test.png

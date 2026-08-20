@@ -14,6 +14,13 @@ The analysis focuses on:
 
 The dataset is synthetic for SQL logic but scaled to FitLife’s real annual traffic of **1,200,000 users**.
 
+## Key Deliverables & Interactive Artifacts
+
+- **Interactive Tableau Dashboard:** [FitLife Product Analytics on Tableau Public](https://public.tableau.com/app/profile/oleksandr.nikishyn/viz/FitLifeProductAnalytics/Dashboard1)
+- **Executive Presentation (PDF):** [FitLife Analytics Presentation (PDF)](presentation/FitLife%20Analytics%20Presentation.pdf)
+- **SQL Analytical Scripts:** [PostgreSQL Queries](sql/)
+- **Python Analytics & Modeling:** [Jupyter Notebooks](python/)
+
 ## Tools & Metrics
 - **SQL (PostgreSQL)** — funnel analysis, weekly retention, monthly cohorts
 - **Python (Pandas, Seaborn, Statsmodels)** — cohort visualization, statistical testing
@@ -187,31 +194,29 @@ The redesigned Paywall significantly improves trial monetization and should be r
 
 ## Repository Structure
 
-```bash
-fitlife-analytics/
-├── data/
-│   ├── users.csv
-│   ├── activity.csv
-│   └── transactions.csv
-├── presentation/
-│   └── FitLife Analytics Presentation.pdf
-├── sql/
-│   ├── funnel_analysis.sql
-│   ├── retention_weekly.sql
-│   └── cohort_monthly.sql
-├── python/
-│   ├── retention_heatmap.ipynb
-│   ├── ab_test_analysis.ipynb
-│   └── unit_economics.ipynb
-├── visuals/
-│   ├── funnel_results.png
-│   ├── retention_heatmap.png
-│   └── paywall_ab_test.png
-├── .gitattributes
-├── .gitignore
-├── README.md                  
-└── requirements.txt
-```
+📂 **[fitlife-analytics-case](./)**
+├── 📂 **data/**
+│   ├── 📄 `users.csv`
+│   ├── 📄 `activity.csv`
+│   └── 📄 `transactions.csv`
+├── 📂 **presentation/**
+│   └── 📄 **[FitLife Analytics Presentation.pdf](presentation/FitLife%20Analytics%20Presentation.pdf)**
+├── 📂 **sql/**
+│   ├── 📜 `funnel_analysis.sql`
+│   ├── 📜 `retention_weekly.sql`
+│   └── 📜 `cohort_monthly.sql`
+├── 📂 **python/**
+│   ├── 📓 `retention_heatmap.ipynb`
+│   ├── 📓 `ab_test_analysis.ipynb`
+│   └── 📓 `unit_economics.ipynb`
+├── 📂 **visuals/**
+│   ├── 🖼️ `funnel_results.png`
+│   ├── 🖼️ `retention_heatmap.png`
+│   └── 🖼️ `paywall_ab_test.png`
+├── 📄 `.gitattributes`
+├── 📄 `.gitignore`
+├── 📝 **[README.md](README.md)**
+└── ⚙️ `requirements.txt`
 
 ## Summary
 This project demonstrates the full workflow of a product data analyst:

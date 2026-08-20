@@ -205,7 +205,8 @@ fitlife-analytics/
 ├── sql/
 │   ├── funnel_analysis.sql
 │   ├── retention_weekly.sql
-│   └── cohort_monthly.sql
+│   ├── cohort_monthly.sql
+│   └── schema.sql
 ├── python/
 │   ├── retention_heatmap.ipynb
 │   ├── ab_test_analysis.ipynb

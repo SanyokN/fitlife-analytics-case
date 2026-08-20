@@ -1,38 +1,42 @@
-WITH user_first_activity AS (
+-- Profile execution plan, timing, and memory/disk usage
+EXPLAIN (ANALYZE, BUFFERS, TIMING)
+
+WITH user_first_week AS (
+    -- CTE 1: Determine the cohort (first action week) for each user
     SELECT 
         user_id,
-        DATE_TRUNC('week', MIN(event_date::date))::date AS cohort_week
+        DATE_TRUNC('week', MIN(event_date))::date AS cohort_week
     FROM activity
     GROUP BY user_id
 ),
+
+weekly_activity AS (
+    -- CTE 2: Get all unique activity weeks per user
+    SELECT DISTINCT
+        user_id,
+        DATE_TRUNC('week', event_date)::date AS activity_week
+    FROM activity
+),
+
 cohort_sizes AS (
+    -- CTE 3: Calculate the base size of each weekly cohort
     SELECT 
         cohort_week,
         COUNT(DISTINCT user_id) AS cohort_size
-    FROM user_first_activity
+    FROM user_first_week
     GROUP BY cohort_week
-),
-weeks_grid AS (
-    SELECT 
-        cs.cohort_week,
-        cs.cohort_size,
-        w.week_number
-    FROM cohort_sizes cs
-    CROSS JOIN generate_series(0, 8) AS w(week_number)
 )
+
+-- Main Query: Weekly retention matrix calculation
 SELECT 
-    g.cohort_week,
-    g.cohort_size,
-    g.week_number,
-    COUNT(DISTINCT t.user_id) AS active_paying_users,
-    ROUND(
-        COALESCE(COUNT(DISTINCT t.user_id)::numeric / NULLIF(g.cohort_size, 0) * 100, 0), 2
-    ) AS retention_rate_pct
-FROM weeks_grid g
-JOIN user_first_activity f ON f.cohort_week = g.cohort_week
-LEFT JOIN transactions t 
-    ON f.user_id = t.user_id
-   AND t.payment_status = 'completed'
-   AND DATE_TRUNC('week', t.payment_date::date)::date = g.cohort_week + (g.week_number * INTERVAL '1 week')
-GROUP BY g.cohort_week, g.cohort_size, g.week_number
-ORDER BY g.cohort_week, g.week_number;
+    cs.cohort_week,
+    cs.cohort_size,
+    -- Calculate week offset (0 = registration week, 1 = next week)
+    FLOOR((wa.activity_week - cs.cohort_week) / 7)::int AS week_number,
+    COUNT(DISTINCT wa.user_id) AS active_users,
+    ROUND((COUNT(DISTINCT wa.user_id)::numeric / cs.cohort_size) * 100, 2) AS retention_rate_pct
+FROM cohort_sizes cs
+JOIN user_first_week fw ON cs.cohort_week = fw.cohort_week
+JOIN weekly_activity wa ON fw.user_id = wa.user_id
+GROUP BY 1, 2, 3
+ORDER BY 1, 3;

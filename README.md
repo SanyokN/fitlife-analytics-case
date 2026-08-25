@@ -34,46 +34,54 @@ The dataset is synthetic for SQL logic but scaled to FitLife’s real annual tra
   $$\text{CR}_1 = \text{Trial Activation Rate} \times \text{Trial-to-Paid CR}$$
 
 ## Funnel Analysis (SQL)
-### SQL Query
+### Marketing Channel Performance (`funnel_by_source.sql`)
 ```sql
--- Calculate funnel conversion rates (Registration -> Trial -> Paid) by traffic source
+-- Profile execution plan, timing, and memory/disk usage
+EXPLAIN (ANALYZE, BUFFERS, TIMING)
+
+WITH user_summary AS (
+    SELECT 
+        u.id AS user_id,
+        u.source,
+        u.country_code,
+        COUNT(DISTINCT a.user_id) AS is_trial,
+        COUNT(DISTINCT t.user_id) AS is_paid
+    FROM users u
+    LEFT JOIN activity a ON u.id = a.user_id
+    LEFT JOIN transactions t ON u.id = t.user_id
+    GROUP BY u.id, u.source, u.country_code
+)
 SELECT 
-    u.source,
-    COUNT(DISTINCT u.id) AS total_users,
-    COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END) AS trials,
-    COUNT(DISTINCT CASE WHEN t.payment_status = 'completed' THEN u.id END) AS paid,
-    ROUND(
-        COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END) * 100.0 
-        / COUNT(DISTINCT u.id), 2
-    ) AS cr_to_trial,
-    ROUND(
-        COUNT(DISTINCT CASE WHEN t.payment_status = 'completed' THEN u.id END) * 100.0 
-        / NULLIF(COUNT(DISTINCT CASE WHEN a.event_name = 'trial_activated' THEN u.id END), 0), 2
-    ) AS cr_trial_to_paid
-FROM users u
-LEFT JOIN activity a 
-    ON u.id = a.user_id 
-   AND a.event_name = 'trial_activated'
-LEFT JOIN transactions t 
-    ON u.id = t.user_id 
-   AND t.payment_status = 'completed'
-GROUP BY u.source
-ORDER BY total_users DESC;
+    source,
+    country_code,
+    COUNT(user_id) AS total_users,
+    SUM(is_trial) AS trials,
+    SUM(is_paid) AS paid,
+    ROUND((SUM(is_trial)::NUMERIC / NULLIF(COUNT(user_id), 0)) * 100, 2) AS cr_to_trial,
+    ROUND((SUM(is_paid)::NUMERIC / NULLIF(SUM(is_trial), 0)) * 100, 2) AS cr_trial_to_paid,
+    ROUND((SUM(is_paid)::NUMERIC / NULLIF(COUNT(user_id), 0)) * 100, 2) AS overall_conversion_pct
+FROM user_summary
+GROUP BY source, country_code
+ORDER BY source, total_users DESC;
 ```
 
-### Funnel Results
-<img width="932" height="135" alt="funnel_results" src="https://github.com/user-attachments/assets/d2c92a25-422b-4556-845e-08e88c361b9d" />
+### Funnel Results (Segmented by Channel & Country)
+![Marketing Channel Conversion Funnel by Country](visuals/funnel_by_source.png)
 
-&nbsp;
+**Key Takeaways:** 
+* **TikTok Critical Issue**: Across all markets (DE, RU, GB, KZ, US), TikTok generated **0%** paid subscribers (cr_trial_to_paid = 0), indicating invalid traffic or flawed ad targeting.
 
-> **Key Takeaway:** 
-> While **TikTok** shows critical issues in *Trial Activation* (1.67%), **Instagram** shows the strongest *Trial-to-Paid CR* (15.91%). The aggregated blended baseline **Overall CR1** across all channels is **1.53%**.
+* **Google Ads Bottleneck in US**: While driving high volume in the US (116 users), Google Ads resulted in **0%** conversion to paid subscribers.
+
+* **Top Geographic Performers: Organic** traffic leads overall conversion in RU (**3.01%**) and KZ (**2.48%**), while **Instagram** achieves exceptional trial-to-paid rates in KZ (**25.00%**) and GB (**22.22%**).
+
+### Product Funnel Performance (`funnel_analysis.sql`)
+![Product Conversion Funnel Segmented by Geography](visuals/funnel_analysis.png)
 
 ### Key Insights
 
-* **Organic** is the top-performing acquisition channel, leading in trial activation rate (**13.43%**).
-* **Instagram** delivers the highest-quality leads, achieving the top trial-to-paid conversion rate (**15.91%**).
-* **TikTok** generated 300 users but showed a **0%** trial-to-paid conversion rate (`cr_trial_to_paid = 0`).
+* **Geographic Disparity**: The US market has the lowest overall conversion (**0.24%**), despite having the largest registered user volume (420 users).
+* **Top Overall CR**: Kazakhstan (**1.75%**) and Russia (**1.55%**) yield the highest end-to-end product conversions.
 
 ## Retention Analysis (Python)
 ### Code (key parts)
@@ -204,6 +212,7 @@ fitlife-analytics/
 │   └── FitLife Analytics Presentation.pdf
 ├── sql/
 │   ├── funnel_analysis.sql
+│   ├── funnel_by_source.sql
 │   ├── retention_weekly.sql
 │   ├── cohort_monthly.sql
 │   └── schema.sql
@@ -213,8 +222,9 @@ fitlife-analytics/
 │   └── unit_economics.ipynb
 ├── visuals/
 │   ├── dashboard_overview.png
-│   ├── funnel_results.png
-│   ├── retention_heatmap.png
+│   ├── funnel_analysis.png
+│   ├── funnel_by_source.png
+│   ├── retention_heatmap_weekly.png
 │   └── paywall_ab_test.png
 ├── .gitattributes
 ├── .gitignore

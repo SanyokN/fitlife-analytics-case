@@ -1,5 +1,13 @@
 # FitLife Analytics — End‑to‑End Data Analytics Case Study
 ### SQL • Python • Cohorts • Unit Economics • A/B Testing
+
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-003366?style=for-the-badge&logo=postgresql&logoColor=white)
+![Python](https://img.shields.io/badge/Python-005580?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-0077B6?style=for-the-badge&logo=pandas&logoColor=white)
+![SciPy](https://img.shields.io/badge/SciPy-0096C7?style=for-the-badge&logo=scipy&logoColor=white)
+![Tableau](https://img.shields.io/badge/Tableau-03045E?style=for-the-badge&logo=tableau&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-48CAE4?style=for-the-badge&logo=jupyter&logoColor=black)
+
 This case study analyzes FitLife’s funnel performance, retention behavior, unit economics, and A/B test results to identify growth bottlenecks and quantify the impact of a redesigned Paywall.
 
 ## Project Overview

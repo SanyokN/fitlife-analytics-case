@@ -16,7 +16,7 @@ env/
 
 # OS generated files
 .DS_Store
-Thumbs.dbS
+Thumbs.db
 
 # Repomix generated files
 repomix-output.xml

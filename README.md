@@ -171,27 +171,27 @@ FitLife cannot scale efficiently without improving overall conversion (CR1) or r
 A redesigned Paywall will increase trial‑to‑paid conversion.
 
 ### Results
-| Group    | Sample Size (N) | Overall CR (CR1) | Buyers  |
-|----------|-|------------|---------|
-| Control  | 24,100 | 1.53%      | 362  |
-| Variant  | 24,350 | 1.87%      | 455  |
+| Group   | Sample Size (N) | Overall CR (CR1) | Buyers  |
+|----------|-----------------|------------------|---------|
+| Control  | 24,100          | 1.53%            | 368     |
+| Variant  | 24,350          | 1.87%            | 456     |
 
-- **Uplift**: +24.7%
-- **p-value**: 0.00096 (statistically significant)
+- **Uplift**: +22.6%
+- **p-value**: 0.00325 (statistically significant)
 
 ## Business Impact
 
-By extrapolating the observed uplift (+24.7%) to our annual traffic of 1.2M users, we project an additional **+4,440 incremental subscribers** per year.
+By extrapolating the observed conversion uplift (+22.6%) to our annual traffic of 1.2M users, we project an additional **+4,149 incremental subscribers** per year.
 
 | Metric | Value |
 | :--- | :--- |
 | Annual Traffic | 1,200,000 users |
-| Baseline Buyers (Control) | 18,000 |
-| Projected Buyers (Variant B) | 22,440 |
-| **Incremental Subscribers** | **+4,440** |
-| **Additional Annual Revenue** | **+$186,258** |
+| Baseline Buyers (Control @ 1.527%) | 18,324 |
+| Projected Buyers (Variant B @ 1.873%) | 22,473 |
+| **Incremental Subscribers** | **+4,149** |
+| **Additional Annual Revenue** | **+$174,092** |
 
-> **Note on Revenue Calculation:** Calculated as `4,440 incremental buyers × $41.96 LTV`.
+> **Note on Revenue Calculation:** Calculated as `4,149 incremental buyers × $41.96 LTV`.
 
 ### Conclusion
 The redesigned Paywall significantly improves trial monetization and should be rolled out globally.
@@ -200,7 +200,7 @@ The redesigned Paywall significantly improves trial monetization and should be r
 - High‑volume channels deliver weak trial activation, indicating inefficient spend.
 - Retention decays sharply after Week 1, indicating onboarding gaps.
 - LTV/CAC ≈ 1.4×, indicating limited scalability.
-- The new Paywall delivers a 24.7% uplift in trial-to-paid conversion, resulting in approximately $186k in additional annual revenue.
+- The new Paywall delivers a 22.6% uplift in conversion, resulting in approximately **$174k** in additional annual revenue.
 
 ## Recommendations
 - Roll out the new Paywall.

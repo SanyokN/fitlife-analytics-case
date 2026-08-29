@@ -1,5 +1,5 @@
 -- Profile execution plan, timing, and memory/disk usage
-EXPLAIN (ANALYZE, BUFFERS, TIMING)
+-- EXPLAIN (ANALYZE, BUFFERS, TIMING)
 
 WITH user_first_week AS (
     -- CTE 1: Determine cohort week and geography from users table

@@ -78,9 +78,7 @@ ORDER BY source, total_users DESC;
 
 **Key Takeaways:** 
 * **TikTok Critical Issue**: Across all markets (DE, RU, GB, KZ, US), TikTok generated **0%** paid subscribers (cr_trial_to_paid = 0), indicating invalid traffic or flawed ad targeting.
-
 * **Google Ads Bottleneck in US**: While driving high volume in the US (116 users), Google Ads resulted in **0%** conversion to paid subscribers.
-
 * **Top Geographic Performers: Organic** traffic leads overall conversion in RU (**3.01%**) and KZ (**2.48%**), while **Instagram** achieves exceptional trial-to-paid rates in KZ (**25.00%**) and GB (**22.22%**).
 
 ### Product Funnel Performance (`funnel_analysis.sql`)
